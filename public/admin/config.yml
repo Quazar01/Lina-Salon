@@ -1,0 +1,188 @@
+# Decap CMS configuration for Lina Salon.
+# Every label and hint is in Arabic: the salon owner reads Arabic only.
+# Translatable fields are objects {ar, nl, fr, en}: she fills in Arabic,
+# Sami fills in the other three (empty ones show the Arabic text meanwhile).
+
+backend:
+  name: github
+  repo: YOUR-GITHUB-USERNAME/lina-salon # TODO: replace with the real repository
+  branch: main
+  commit_messages:
+    update: 'cms: update {{slug}}'
+    uploadMedia: 'cms: upload {{path}}'
+    deleteMedia: 'cms: delete {{path}}'
+
+# `npm run cms` + `npm run dev`, then open http://localhost:4321/admin/ to edit without logging in.
+local_backend: true
+
+locale: ar
+site_url: https://linasalon.be
+display_url: https://linasalon.be
+
+media_folder: src/assets/uploads
+public_folder: /src/assets/uploads
+
+collections:
+  - name: site
+    label: محتوى الموقع
+    description: اختاري ما تريدين تعديله. بعد الضغط على «نشر» يتحدّث الموقع خلال دقيقتين تقريبًا.
+    editor:
+      preview: false
+    files:
+      # ------------------------------------------------------------------ Settings
+      - name: settings
+        label: الهاتف والعنوان ومواعيد العمل
+        file: src/content/settings.json
+        fields:
+          - { label: رقم الهاتف, name: phone, widget: string, hint: 'مثال: +32 3 284 17 96' }
+          - { label: رقم واتساب, name: whatsapp, widget: string, hint: 'مع رمز الدولة، مثال: +32 471 83 92 64' }
+          - { label: الشارع ورقم المبنى, name: street, widget: string }
+          - { label: الرمز البريدي, name: postcode, widget: string }
+          - { label: المدينة, name: city, widget: string }
+          - label: العنوان للخريطة
+            name: mapsQuery
+            widget: string
+            hint: العنوان الكامل كما يُكتب في خرائط Google.
+          - label: رابط تقييمات Google
+            name: googleReviewsUrl
+            widget: string
+            required: false
+          - { label: رابط إنستغرام, name: instagram, widget: string, required: false, hint: 'اتركيه فارغًا لإخفاء الأيقونة.' }
+          - { label: رابط فيسبوك, name: facebook, widget: string, required: false, hint: 'اتركيه فارغًا لإخفاء الأيقونة.' }
+          - { label: رابط تيك توك, name: tiktok, widget: string, required: false, hint: 'اتركيه فارغًا لإخفاء الأيقونة.' }
+          - label: مواعيد العمل
+            name: hours
+            widget: list
+            allow_add: false
+            allow_remove: false
+            allow_reorder: false
+            summary: '{{fields.day}}'
+            fields:
+              - label: اليوم
+                name: day
+                widget: select
+                options:
+                  - { label: الاثنين, value: mon }
+                  - { label: الثلاثاء, value: tue }
+                  - { label: الأربعاء, value: wed }
+                  - { label: الخميس, value: thu }
+                  - { label: الجمعة, value: fri }
+                  - { label: السبت, value: sat }
+                  - { label: الأحد, value: sun }
+              - { label: مغلق في هذا اليوم, name: closed, widget: boolean, default: false }
+              - label: يفتح الساعة
+                name: open
+                widget: string
+                required: false
+                hint: 'اكتبي الوقت هكذا: 09:30'
+                pattern: ['^$|^([01][0-9]|2[0-3]):[0-5][0-9]$', 'اكتبي الوقت بالشكل 09:30']
+              - label: يغلق الساعة
+                name: close
+                widget: string
+                required: false
+                hint: 'اكتبي الوقت هكذا: 18:30'
+                pattern: ['^$|^([01][0-9]|2[0-3]):[0-5][0-9]$', 'اكتبي الوقت بالشكل 18:30']
+
+      # ------------------------------------------------------------------ Home
+      - name: home
+        label: الصفحة الرئيسية ومن نحن
+        file: src/content/home.json
+        fields:
+          - label: العنوان الكبير
+            name: heroTitle
+            widget: object
+            hint: 'ضعي كلمة بين نجمتين *هكذا* لتظهر باللون الوردي.'
+            fields: &short_text
+              - { label: بالعربية, name: ar, widget: string }
+              - { label: بالهولندية (يترجمها سامي), name: nl, widget: string, required: false, hint: 'اتركيه فارغًا إن لم تعرفي الترجمة، وسيظهر النص العربي مؤقتًا.' }
+              - { label: بالفرنسية (يترجمها سامي), name: fr, widget: string, required: false }
+              - { label: بالإنجليزية (يترجمها سامي), name: en, widget: string, required: false }
+          - { label: الجملة تحت العنوان, name: heroText, widget: object, fields: *short_text }
+          - { label: جملة «للنساء فقط», name: womenOnly, widget: object, fields: *short_text }
+          - { label: الصورة الرئيسية, name: heroImage, widget: image, choose_url: false }
+          - { label: وصف الصورة الرئيسية (لمن لا يرى الصور), name: heroImageAlt, widget: object, fields: *short_text }
+          - { label: عنوان قسم «من نحن», name: aboutTitle, widget: object, hint: 'ضعي كلمة بين نجمتين *هكذا* لتظهر باللون الوردي.', fields: *short_text }
+          - label: نص قسم «من نحن»
+            name: aboutText
+            widget: object
+            hint: اتركي سطرًا فارغًا بين الفقرات.
+            fields: &long_text
+              - { label: بالعربية, name: ar, widget: text }
+              - { label: بالهولندية (يترجمها سامي), name: nl, widget: text, required: false }
+              - { label: بالفرنسية (يترجمها سامي), name: fr, widget: text, required: false }
+              - { label: بالإنجليزية (يترجمها سامي), name: en, widget: text, required: false }
+          - { label: التوقيع, name: aboutSignature, widget: string, required: false }
+          - { label: صورة قسم «من نحن», name: aboutImage, widget: image, choose_url: false }
+          - { label: وصف صورة «من نحن», name: aboutImageAlt, widget: object, fields: *short_text }
+
+      # ------------------------------------------------------------------ Services
+      - name: services
+        label: الخدمات والأسعار
+        file: src/content/services.json
+        fields:
+          - label: الأقسام
+            name: categories
+            widget: list
+            label_singular: قسم
+            summary: '{{fields.name.ar}}'
+            fields:
+              - { label: اسم القسم, name: name, widget: object, fields: *short_text }
+              - label: الخدمات
+                name: items
+                widget: list
+                label_singular: خدمة
+                summary: '{{fields.name.ar}} · {{fields.price}} €'
+                fields:
+                  - { label: اسم الخدمة, name: name, widget: object, fields: *short_text }
+                  - label: وصف قصير (اختياري)
+                    name: description
+                    widget: object
+                    required: false
+                    collapsed: true
+                    fields:
+                      - { label: بالعربية, name: ar, widget: text, required: false }
+                      - { label: بالهولندية (يترجمها سامي), name: nl, widget: text, required: false }
+                      - { label: بالفرنسية (يترجمها سامي), name: fr, widget: text, required: false }
+                      - { label: بالإنجليزية (يترجمها سامي), name: en, widget: text, required: false }
+                  - { label: السعر باليورو, name: price, widget: number, value_type: float, min: 0 }
+                  - { label: السعر «ابتداءً من», name: from, widget: boolean, default: false, hint: 'فعّليه إذا كان السعر يبدأ من هذا المبلغ ويزيد حسب الشعر.' }
+                  - { label: المدة بالدقائق, name: duration, widget: number, value_type: int, min: 0, required: false, hint: 'اكتبي 0 لإخفاء المدة.' }
+
+      # ------------------------------------------------------------------ Gallery
+      - name: gallery
+        label: معرض الصور
+        file: src/content/gallery.json
+        fields:
+          - label: الصور
+            name: images
+            widget: list
+            label_singular: صورة
+            summary: '{{fields.alt.ar}}'
+            fields:
+              - { label: الصورة, name: image, widget: image, choose_url: false }
+              - { label: وصف الصورة (لمن لا يرى الصور), name: alt, widget: object, fields: *short_text }
+
+      # ------------------------------------------------------------------ Reviews
+      - name: reviews
+        label: آراء الزبونات
+        file: src/content/reviews.json
+        fields:
+          - label: الآراء
+            name: reviews
+            widget: list
+            label_singular: رأي
+            summary: '{{fields.author}}'
+            hint: انسخي آراء حقيقية فقط من Google، كما كتبتها الزبونة.
+            fields:
+              - { label: اسم الزبونة, name: author, widget: string }
+              - { label: عدد النجوم, name: rating, widget: number, value_type: int, min: 1, max: 5, default: 5 }
+              - label: لغة الرأي
+                name: language
+                widget: select
+                default: ar
+                options:
+                  - { label: العربية, value: ar }
+                  - { label: الهولندية, value: nl }
+                  - { label: الفرنسية, value: fr }
+                  - { label: الإنجليزية, value: en }
+              - { label: نص الرأي, name: quote, widget: text }

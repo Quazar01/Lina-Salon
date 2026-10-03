@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ar">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>إدارة موقع لينا صالون</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet" />
+    <style>
+      /* Arabic-first editing: an Arabic typeface, and every input follows the direction of what is typed. */
+      body,
+      button,
+      input,
+      textarea,
+      select,
+      label {
+        font-family: 'Tajawal', system-ui, sans-serif !important;
+      }
+      input,
+      textarea {
+        unicode-bidi: plaintext;
+        text-align: start;
+        font-size: 17px !important;
+      }
+      label {
+        font-size: 15px !important;
+      }
+    </style>
+    <script>
+      // We register an Arabic interface translation before Decap starts.
+      window.CMS_MANUAL_INIT = true;
+    </script>
+  </head>
+  <body>
+    <script src="https://unpkg.com/decap-cms@3.8.2/dist/decap-cms.js"></script>
+    <script src="/admin/ar-locale.js"></script>
+  </body>
+</html>

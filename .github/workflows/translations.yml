@@ -1,0 +1,56 @@
+# When content changes (usually a CMS edit in Arabic), keep a single
+# "Translations needed" issue listing what still needs NL / FR / EN text.
+# The issue closes itself once everything is translated.
+name: Translations
+
+on:
+  push:
+    branches: [main]
+    paths: ['src/content/**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: translations
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Find missing translations
+        id: check
+        run: |
+          node scripts/check-translations.mjs --markdown report.md
+          if node scripts/check-translations.mjs --strict > /dev/null; then
+            echo "missing=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "missing=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Open, update or close the issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MISSING: ${{ steps.check.outputs.missing }}
+        run: |
+          TITLE="Translations needed"
+          gh label create translations --color FBCA04 --description "Content waiting for NL/FR/EN" 2>/dev/null || true
+          NUMBER=$(gh issue list --label translations --state open --json number --jq '.[0].number')
+
+          if [ "$MISSING" = "true" ]; then
+            if [ -n "$NUMBER" ]; then
+              gh issue edit "$NUMBER" --body-file report.md
+            else
+              gh issue create --title "$TITLE" --label translations --body-file report.md
+            fi
+          elif [ -n "$NUMBER" ]; then
+            gh issue close "$NUMBER" --comment "Everything is translated now."
+          fi

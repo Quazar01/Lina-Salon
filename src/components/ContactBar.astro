@@ -1,0 +1,55 @@
+---
+import { Icon } from 'astro-icon/components';
+import { ui, type Locale } from '../lib/i18n';
+import { routeHref, telHref, whatsappHref } from '../lib/site';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = ui(locale);
+const wa = whatsappHref(t.whatsappMessage);
+---
+
+<!-- Phones: the three main actions, always one thumb-tap away. -->
+<nav
+  class="glass fixed inset-x-3 bottom-[calc(env(safe-area-inset-bottom)+0.75rem)] z-30 grid grid-cols-3 gap-1 rounded-[1.4rem] p-1.5 md:hidden"
+  aria-label={t.cta.book}
+>
+  <a href={telHref} class="btn min-h-14 flex-col gap-1 rounded-2xl px-1 text-[0.8rem] text-ink">
+    <Icon name="ph:phone" class="size-[1.35rem]" aria-hidden="true" />{t.cta.call}
+  </a>
+  <a href={wa} class="btn btn-primary min-h-14 flex-col gap-1 rounded-2xl px-1 text-[0.8rem]">
+    <Icon name="ph:whatsapp-logo" class="size-[1.35rem]" aria-hidden="true" />{t.cta.whatsapp}
+  </a>
+  <a href={routeHref} target="_blank" rel="noopener" class="btn min-h-14 flex-col gap-1 rounded-2xl px-1 text-[0.8rem] text-ink">
+    <Icon name="ph:navigation-arrow" class="size-[1.35rem]" aria-hidden="true" />{t.cta.route}
+  </a>
+</nav>
+
+<!-- Desktop: a WhatsApp button that appears once the hero's buttons have scrolled away. -->
+<a
+  href={wa}
+  class="btn btn-primary fixed end-6 bottom-6 z-30 hidden min-h-14 translate-y-4 px-5 opacity-0 transition-[opacity,transform,background-color] duration-300 ease-out data-shown:translate-y-0 data-shown:opacity-100 md:inline-flex"
+  tabindex="-1"
+  data-wa-fab
+>
+  <Icon name="ph:whatsapp-logo" class="size-6" aria-hidden="true" />
+  {t.cta.whatsapp}
+</a>
+
+<script>
+  const fab = document.querySelector<HTMLElement>('[data-wa-fab]');
+  const hero = document.getElementById('hero-title')?.closest('section');
+  if (fab && hero && 'IntersectionObserver' in window) {
+    new IntersectionObserver(([e]) => {
+      const shown = !e.isIntersecting;
+      fab.toggleAttribute('data-shown', shown);
+      fab.tabIndex = shown ? 0 : -1;
+      fab.setAttribute('aria-hidden', String(!shown));
+    }).observe(hero);
+  } else if (fab) {
+    fab.setAttribute('data-shown', '');
+    fab.tabIndex = 0;
+  }
+</script>

@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "title": "Lina Salon · Women-only hair salon in Antwerp",
+    "description": "Lina Salon is a women-only hair salon in Antwerp. Cuts, colour, blow-dries and bridal styling. Call or send a WhatsApp message to book."
+  },
+  "nav": {
+    "services": "Services",
+    "about": "About",
+    "gallery": "Photos",
+    "reviews": "Reviews",
+    "visit": "Visit",
+    "menu": "Menu",
+    "close": "Close",
+    "skip": "Skip to content"
+  },
+  "lang": {
+    "label": "Choose language"
+  },
+  "cta": {
+    "call": "Call",
+    "whatsapp": "WhatsApp",
+    "route": "Directions",
+    "book": "Book a visit"
+  },
+  "whatsappMessage": "Hello Lina Salon, I would like to book an appointment.",
+  "hero": {
+    "eyebrow": "Hair salon for women"
+  },
+  "status": {
+    "openNow": "Open now",
+    "closesAt": "closes at {time}",
+    "closed": "Closed",
+    "opensToday": "opens today at {time}",
+    "opensTomorrow": "opens tomorrow at {time}",
+    "opensOn": "opens {day} at {time}"
+  },
+  "days": {
+    "mon": "Monday",
+    "tue": "Tuesday",
+    "wed": "Wednesday",
+    "thu": "Thursday",
+    "fri": "Friday",
+    "sat": "Saturday",
+    "sun": "Sunday"
+  },
+  "services": {
+    "eyebrow": "Services & prices",
+    "title": "What we do for you",
+    "intro": "Every visit starts with a short chat about what you want. Prices depend on the length and thickness of your hair, and we always tell you before we start.",
+    "from": "from",
+    "minutes": "{n} min"
+  },
+  "about": {
+    "eyebrow": "About"
+  },
+  "gallery": {
+    "eyebrow": "Photos",
+    "title": "From the salon",
+    "open": "Enlarge photo",
+    "prev": "Previous photo",
+    "next": "Next photo",
+    "close": "Close",
+    "counter": "{i} of {n}"
+  },
+  "reviews": {
+    "eyebrow": "Reviews",
+    "title": "What clients say",
+    "seeAll": "All reviews on Google",
+    "rating": "{n} out of 5 stars"
+  },
+  "visit": {
+    "eyebrow": "Visit",
+    "title": "Come by",
+    "address": "Address",
+    "hours": "Opening hours",
+    "today": "Today",
+    "closed": "Closed",
+    "phone": "Phone",
+    "mapLoad": "Show map",
+    "mapNotice": "The map is served by Google Maps. Nothing is shared with Google until you press the button.",
+    "mapTitle": "Map showing where Lina Salon is"
+  },
+  "footer": {
+    "follow": "Follow us",
+    "rights": "All rights reserved."
+  }
+}

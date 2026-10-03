@@ -1,0 +1,370 @@
+{
+  "categories": [
+    {
+      "name": {
+        "ar": "القص",
+        "nl": "Knippen",
+        "fr": "Coupes",
+        "en": "Cuts"
+      },
+      "items": [
+        {
+          "name": {
+            "ar": "غسل وقص وسشوار",
+            "nl": "Wassen, knippen & föhnen",
+            "fr": "Shampooing, coupe & brushing",
+            "en": "Wash, cut & blow-dry"
+          },
+          "description": {
+            "ar": "",
+            "nl": "",
+            "fr": "",
+            "en": ""
+          },
+          "price": 38,
+          "from": false,
+          "duration": 60
+        },
+        {
+          "name": {
+            "ar": "قص فقط",
+            "nl": "Enkel knippen",
+            "fr": "Coupe seule",
+            "en": "Cut only"
+          },
+          "description": {
+            "ar": "",
+            "nl": "",
+            "fr": "",
+            "en": ""
+          },
+          "price": 26,
+          "from": false,
+          "duration": 30
+        },
+        {
+          "name": {
+            "ar": "قص الغرّة",
+            "nl": "Pony bijknippen",
+            "fr": "Retouche frange",
+            "en": "Fringe trim"
+          },
+          "description": {
+            "ar": "",
+            "nl": "",
+            "fr": "",
+            "en": ""
+          },
+          "price": 9,
+          "from": false,
+          "duration": 10
+        },
+        {
+          "name": {
+            "ar": "بنات حتى 12 سنة",
+            "nl": "Meisjes tot 12 jaar",
+            "fr": "Filles jusqu'à 12 ans",
+            "en": "Girls up to 12"
+          },
+          "description": {
+            "ar": "",
+            "nl": "",
+            "fr": "",
+            "en": ""
+          },
+          "price": 19,
+          "from": false,
+          "duration": 30
+        }
+      ]
+    },
+    {
+      "name": {
+        "ar": "الصبغة",
+        "nl": "Kleuren",
+        "fr": "Couleur",
+        "en": "Colour"
+      },
+      "items": [
+        {
+          "name": {
+            "ar": "صبغ الجذور",
+            "nl": "Uitgroei kleuren",
+            "fr": "Couleur racines",
+            "en": "Root colour"
+          },
+          "description": {
+            "ar": "",
+            "nl": "",
+            "fr": "",
+            "en": ""
+          },
+          "price": 45,
+          "from": true,
+          "duration": 75
+        },
+        {
+          "name": {
+            "ar": "صبغ كامل",
+            "nl": "Volledige kleuring",
+            "fr": "Couleur complète",
+            "en": "Full colour"
+          },
+          "description": {
+            "ar": "",
+            "nl": "",
+            "fr": "",
+            "en": ""
+          },
+          "price": 62,
+          "from": true,
+          "duration": 90
+        },
+        {
+          "name": {
+            "ar": "خصل (هايلايت)",
+            "nl": "Highlights",
+            "fr": "Mèches",
+            "en": "Highlights"
+          },
+          "description": {
+            "ar": "",
+            "nl": "",
+            "fr": "",
+            "en": ""
+          },
+          "price": 78,
+          "from": true,
+          "duration": 120
+        },
+        {
+          "name": {
+            "ar": "بالياج",
+            "nl": "Balayage",
+            "fr": "Balayage",
+            "en": "Balayage"
+          },
+          "description": {
+            "ar": "مظهر طبيعي كأنه من الشمس، مع التونر.",
+            "nl": "Natuurlijk, zongebleekt effect, inclusief toner.",
+            "fr": "Effet naturel et ensoleillé, patine incluse.",
+            "en": "Natural, sun-lightened look, toner included."
+          },
+          "price": 98,
+          "from": true,
+          "duration": 150
+        }
+      ]
+    },
+    {
+      "name": {
+        "ar": "التصفيف",
+        "nl": "Styling",
+        "fr": "Coiffage",
+        "en": "Styling"
+      },
+      "items": [
+        {
+          "name": {
+            "ar": "سشوار",
+            "nl": "Brushing",
+            "fr": "Brushing",
+            "en": "Blow-dry"
+          },
+          "description": {
+            "ar": "",
+            "nl": "",
+            "fr": "",
+            "en": ""
+          },
+          "price": 27,
+          "from": false,
+          "duration": 40
+        },
+        {
+          "name": {
+            "ar": "كيرلي أو ويفي",
+            "nl": "Krullen of golven",
+            "fr": "Boucles ou ondulations",
+            "en": "Curls or waves"
+          },
+          "description": {
+            "ar": "",
+            "nl": "",
+            "fr": "",
+            "en": ""
+          },
+          "price": 34,
+          "from": false,
+          "duration": 45
+        },
+        {
+          "name": {
+            "ar": "تسريحة مرفوعة",
+            "nl": "Opsteekkapsel",
+            "fr": "Chignon",
+            "en": "Updo"
+          },
+          "description": {
+            "ar": "للأعراس والحفلات والمناسبات.",
+            "nl": "Voor trouwfeesten, feestjes en speciale dagen.",
+            "fr": "Pour les mariages, les fêtes et les grandes occasions.",
+            "en": "For weddings, parties and special days."
+          },
+          "price": 48,
+          "from": true,
+          "duration": 60
+        }
+      ]
+    },
+    {
+      "name": {
+        "ar": "العناية",
+        "nl": "Verzorging",
+        "fr": "Soins",
+        "en": "Treatments"
+      },
+      "items": [
+        {
+          "name": {
+            "ar": "علاج الكيراتين",
+            "nl": "Keratinebehandeling",
+            "fr": "Lissage à la kératine",
+            "en": "Keratin smoothing"
+          },
+          "description": {
+            "ar": "شعر ناعم وأقل تجعّدًا لعدة أشهر.",
+            "nl": "Glad haar met minder pluis, maandenlang.",
+            "fr": "Des cheveux lisses et moins de frisottis pendant des mois.",
+            "en": "Smoother hair with less frizz, for months."
+          },
+          "price": 135,
+          "from": true,
+          "duration": 150
+        },
+        {
+          "name": {
+            "ar": "ماسك للشعر",
+            "nl": "Haarmasker",
+            "fr": "Masque capillaire",
+            "en": "Hair mask"
+          },
+          "description": {
+            "ar": "",
+            "nl": "",
+            "fr": "",
+            "en": ""
+          },
+          "price": 18,
+          "from": false,
+          "duration": 20
+        },
+        {
+          "name": {
+            "ar": "مساج فروة الرأس",
+            "nl": "Hoofdhuidmassage",
+            "fr": "Massage du cuir chevelu",
+            "en": "Scalp massage"
+          },
+          "description": {
+            "ar": "",
+            "nl": "",
+            "fr": "",
+            "en": ""
+          },
+          "price": 15,
+          "from": false,
+          "duration": 15
+        }
+      ]
+    },
+    {
+      "name": {
+        "ar": "العرائس",
+        "nl": "Bruid",
+        "fr": "Mariée",
+        "en": "Bridal"
+      },
+      "items": [
+        {
+          "name": {
+            "ar": "تسريحة العروس مع جلسة تجريبية",
+            "nl": "Bruidskapsel met proefsessie",
+            "fr": "Coiffure de mariée avec essai",
+            "en": "Bridal hair with trial session"
+          },
+          "description": {
+            "ar": "نتفق معًا على التسريحة قبل اليوم الكبير.",
+            "nl": "We bepalen samen je kapsel ruim voor de grote dag.",
+            "fr": "Nous choisissons ensemble votre coiffure bien avant le grand jour.",
+            "en": "We settle on your style together well before the big day."
+          },
+          "price": 165,
+          "from": true,
+          "duration": 0
+        },
+        {
+          "name": {
+            "ar": "تسريحات المرافقات والضيفات",
+            "nl": "Bruidsmeisjes & gasten",
+            "fr": "Demoiselles d'honneur & invitées",
+            "en": "Bridesmaids & guests"
+          },
+          "description": {
+            "ar": "",
+            "nl": "",
+            "fr": "",
+            "en": ""
+          },
+          "price": 45,
+          "from": true,
+          "duration": 0
+        }
+      ]
+    },
+    {
+      "name": {
+        "ar": "إضافات",
+        "nl": "Extra's",
+        "fr": "Extras",
+        "en": "Extras"
+      },
+      "items": [
+        {
+          "name": {
+            "ar": "الحواجب بالخيط",
+            "nl": "Wenkbrauwen met draad",
+            "fr": "Sourcils au fil",
+            "en": "Eyebrow threading"
+          },
+          "description": {
+            "ar": "",
+            "nl": "",
+            "fr": "",
+            "en": ""
+          },
+          "price": 10,
+          "from": false,
+          "duration": 15
+        },
+        {
+          "name": {
+            "ar": "الشارب بالخيط",
+            "nl": "Bovenlip met draad",
+            "fr": "Lèvre supérieure au fil",
+            "en": "Upper lip threading"
+          },
+          "description": {
+            "ar": "",
+            "nl": "",
+            "fr": "",
+            "en": ""
+          },
+          "price": 6,
+          "from": false,
+          "duration": 10
+        }
+      ]
+    }
+  ]
+}

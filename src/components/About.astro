@@ -1,0 +1,71 @@
+---
+import { Image } from 'astro:assets';
+import home from '../content/home.json';
+import { emphasize, localize, t as tr, ui, type Locale } from '../lib/i18n';
+import { resolveImage } from '../lib/images';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = ui(locale);
+const title = localize(home.aboutTitle, locale);
+const body = localize(home.aboutText, locale);
+const paragraphs = body.text.split(/\n\s*\n/).filter(Boolean);
+const image = resolveImage(home.aboutImage);
+---
+
+<section id="about" class="panel bg-blush py-20 md:py-28" aria-labelledby="about-title">
+  <div class="container-page grid items-center gap-14 md:grid-cols-12 md:gap-8">
+    <div class="relative mx-auto w-[84%] max-w-[24rem] md:col-span-5 md:w-full" data-reveal>
+      <div
+        class="arch absolute inset-0 -translate-x-3 translate-y-3 border border-rosewood rtl:translate-x-3 md:-translate-x-5 md:translate-y-5 md:rtl:translate-x-5"
+        aria-hidden="true"
+      >
+      </div>
+      {
+        image && (
+          <Image
+            src={image}
+            alt={tr(home.aboutImageAlt, locale)}
+            widths={[420, 640, 860]}
+            sizes="(min-width: 768px) 24rem, 84vw"
+            class="arch relative aspect-[4/5] w-full object-cover shadow-[0_40px_70px_-35px_rgb(143_63_82/0.5)]"
+          />
+        )
+      }
+    </div>
+
+    <div class="md:col-span-6 md:col-start-7" data-reveal style="--i:1">
+      <p class="eyebrow">{t.about.eyebrow}</p>
+      <h2
+        id="about-title"
+        class="display mt-3 text-[2.25rem] md:text-5xl"
+        lang={title.lang}
+        dir={title.dir}
+        set:html={emphasize(title.text)}
+      />
+      <div class="prose-warm mt-6 max-w-[58ch] text-lg text-ink-soft" lang={body.lang} dir={body.dir}>
+        {paragraphs.map((p) => <p>{p}</p>)}
+      </div>
+      {
+        home.aboutSignature && (
+          <p class="signature mt-8 text-4xl text-accent" dir="auto">
+            {home.aboutSignature}
+          </p>
+        )
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .signature {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 340;
+  }
+  .signature:lang(ar) {
+    font-style: normal;
+  }
+</style>

@@ -1,0 +1,48 @@
+---
+import { LOCALES, LOCALE_META, ui, type Locale } from '../lib/i18n';
+
+interface Props {
+  locale: Locale;
+  class?: string;
+}
+const { locale, class: className } = Astro.props;
+const t = ui(locale);
+---
+
+<nav aria-label={t.lang.label} class:list={['shrink-0', className]}>
+  <ul class="flex items-center rounded-full border border-petal bg-white/50 p-1" dir="ltr">
+    {
+      LOCALES.map((l) => (
+        <li>
+          <a
+            href={`/${l}/`}
+            hreflang={LOCALE_META[l].bcp47}
+            lang={LOCALE_META[l].bcp47}
+            data-lang-link={l}
+            aria-current={l === locale ? 'true' : undefined}
+            class:list={[
+              'flex h-9 min-w-9 items-center justify-center rounded-full px-2 text-sm font-medium transition-[background-color,color] duration-200',
+              l === locale ? 'bg-ink text-cream' : 'text-ink-soft hover:text-ink',
+              l === 'ar' && 'font-arabic text-base leading-none',
+            ]}
+          >
+            <span aria-hidden="true">{LOCALE_META[l].short}</span>
+            <span class="sr-only">{LOCALE_META[l].name}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<script>
+  // Remember a manual choice (used by the root redirect) and keep the current section.
+  document.querySelectorAll<HTMLAnchorElement>('[data-lang-link]').forEach((a) => {
+    a.addEventListener('click', () => {
+      try {
+        localStorage.setItem('lina-lang', a.dataset.langLink!);
+      } catch {}
+      if (location.hash) a.href = `${a.pathname}${location.hash}`;
+    });
+  });
+</script>

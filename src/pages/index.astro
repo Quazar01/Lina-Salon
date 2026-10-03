@@ -1,0 +1,50 @@
+---
+import '@fontsource-variable/fraunces/soft.css';
+import '@fontsource-variable/outfit';
+import '@fontsource/tajawal/500.css';
+import '../styles/global.css';
+import { LOCALES, LOCALE_META, DEFAULT_LOCALE } from '../lib/i18n';
+---
+
+<!doctype html>
+<html lang="nl-BE">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Lina Salon · Antwerpen</title>
+    <meta name="description" content="Lina Salon, kapsalon voor vrouwen in Antwerpen · Salon de coiffure pour femmes à Anvers · صالون شعر للنساء في أنتويرب · Women-only hair salon in Antwerp" />
+    <meta name="theme-color" content="#fdf8f5" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {LOCALES.map((l) => <link rel="alternate" hreflang={LOCALE_META[l].bcp47} href={`/${l}/`} />)}
+    <!-- Pick a language before anything paints: saved choice, then browser languages, then Dutch. -->
+    <script is:inline define:vars={{ locales: LOCALES, fallback: DEFAULT_LOCALE }}>
+      let target = null;
+      try {
+        const saved = localStorage.getItem('lina-lang');
+        if (locales.includes(saved)) target = saved;
+      } catch {}
+      if (!target) {
+        const prefs = navigator.languages?.length ? navigator.languages : [navigator.language || ''];
+        target = prefs.map((l) => l.slice(0, 2).toLowerCase()).find((l) => locales.includes(l)) ?? fallback;
+      }
+      location.replace(`/${target}/${location.hash}`);
+    </script>
+  </head>
+  <body class="flex min-h-svh items-center justify-center p-6">
+    <!-- Only visible without JavaScript (or for a split second). -->
+    <main class="text-center">
+      <p class="display text-4xl">Lina <span class="text-base uppercase tracking-[0.22em] text-ink-soft">Salon</span></p>
+      <ul class="mt-8 flex flex-wrap justify-center gap-2">
+        {
+          LOCALES.map((l) => (
+            <li>
+              <a class="btn btn-quiet" href={`/${l}/`} lang={LOCALE_META[l].bcp47}>
+                {LOCALE_META[l].label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </main>
+  </body>
+</html>

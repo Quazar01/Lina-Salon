@@ -1,0 +1,56 @@
+{
+  "phone": "+32 3 284 17 96",
+  "whatsapp": "+32 471 83 92 64",
+  "street": "Turnhoutsebaan 147",
+  "postcode": "2140",
+  "city": "Antwerpen",
+  "mapsQuery": "Turnhoutsebaan 147, 2140 Antwerpen, België",
+  "googleReviewsUrl": "https://www.google.com/maps/search/?api=1&query=Lina+Salon+Antwerpen",
+  "instagram": "https://www.instagram.com/",
+  "facebook": "https://www.facebook.com/",
+  "tiktok": "",
+  "hours": [
+    {
+      "day": "mon",
+      "closed": true,
+      "open": "",
+      "close": ""
+    },
+    {
+      "day": "tue",
+      "closed": false,
+      "open": "09:30",
+      "close": "18:30"
+    },
+    {
+      "day": "wed",
+      "closed": false,
+      "open": "09:30",
+      "close": "18:30"
+    },
+    {
+      "day": "thu",
+      "closed": false,
+      "open": "09:30",
+      "close": "18:30"
+    },
+    {
+      "day": "fri",
+      "closed": false,
+      "open": "09:30",
+      "close": "19:00"
+    },
+    {
+      "day": "sat",
+      "closed": false,
+      "open": "09:00",
+      "close": "17:00"
+    },
+    {
+      "day": "sun",
+      "closed": true,
+      "open": "",
+      "close": ""
+    }
+  ]
+}

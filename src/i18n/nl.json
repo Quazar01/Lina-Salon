@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "title": "Lina Salon · Kapsalon voor vrouwen in Antwerpen",
+    "description": "Lina Salon is een kapsalon alleen voor vrouwen in Antwerpen. Knippen, kleuren, brushing en bruidskapsels. Bel of stuur een WhatsApp voor een afspraak."
+  },
+  "nav": {
+    "services": "Diensten",
+    "about": "Over ons",
+    "gallery": "Foto's",
+    "reviews": "Reviews",
+    "visit": "Bezoek",
+    "menu": "Menu",
+    "close": "Sluiten",
+    "skip": "Naar de inhoud"
+  },
+  "lang": {
+    "label": "Taal kiezen"
+  },
+  "cta": {
+    "call": "Bellen",
+    "whatsapp": "WhatsApp",
+    "route": "Route",
+    "book": "Afspraak maken"
+  },
+  "whatsappMessage": "Hallo Lina Salon, ik wil graag een afspraak maken.",
+  "hero": {
+    "eyebrow": "Kapsalon voor vrouwen"
+  },
+  "status": {
+    "openNow": "Nu open",
+    "closesAt": "sluit om {time}",
+    "closed": "Gesloten",
+    "opensToday": "opent vandaag om {time}",
+    "opensTomorrow": "opent morgen om {time}",
+    "opensOn": "opent {day} om {time}"
+  },
+  "days": {
+    "mon": "maandag",
+    "tue": "dinsdag",
+    "wed": "woensdag",
+    "thu": "donderdag",
+    "fri": "vrijdag",
+    "sat": "zaterdag",
+    "sun": "zondag"
+  },
+  "services": {
+    "eyebrow": "Diensten & prijzen",
+    "title": "Wat we voor je doen",
+    "intro": "Elke behandeling begint met een kort gesprek over wat je wil. De prijs hangt af van de lengte en dikte van je haar; we zeggen het altijd vooraf.",
+    "from": "vanaf",
+    "minutes": "{n} min"
+  },
+  "about": {
+    "eyebrow": "Over ons"
+  },
+  "gallery": {
+    "eyebrow": "Foto's",
+    "title": "Uit het salon",
+    "open": "Foto vergroten",
+    "prev": "Vorige foto",
+    "next": "Volgende foto",
+    "close": "Sluiten",
+    "counter": "{i} van {n}"
+  },
+  "reviews": {
+    "eyebrow": "Reviews",
+    "title": "Wat klanten zeggen",
+    "seeAll": "Alle reviews op Google",
+    "rating": "{n} van 5 sterren"
+  },
+  "visit": {
+    "eyebrow": "Bezoek",
+    "title": "Kom langs",
+    "address": "Adres",
+    "hours": "Openingsuren",
+    "today": "Vandaag",
+    "closed": "Gesloten",
+    "phone": "Telefoon",
+    "mapLoad": "Kaart laden",
+    "mapNotice": "De kaart komt van Google Maps. Pas wanneer je op de knop drukt, worden gegevens met Google gedeeld.",
+    "mapTitle": "Kaart met de ligging van Lina Salon"
+  },
+  "footer": {
+    "follow": "Volg ons",
+    "rights": "Alle rechten voorbehouden."
+  }
+}

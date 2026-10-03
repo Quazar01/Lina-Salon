@@ -1,0 +1,67 @@
+---
+import { ui, type Locale } from '../lib/i18n';
+import { hours, statusStrings } from '../lib/site';
+
+interface Props {
+  locale: Locale;
+  class?: string;
+}
+const { locale, class: className } = Astro.props;
+---
+
+<!-- Filled in on the client: "open now" depends on the visitor's current time, not build time. -->
+<span
+  class:list={[
+    'inline-flex min-h-8 items-center gap-2 rounded-full border border-petal bg-white/60 px-3 text-sm font-medium text-ink-soft opacity-0 transition-opacity duration-300 data-[state]:opacity-100',
+    className,
+  ]}
+  data-open-status
+  data-hours={JSON.stringify(hours)}
+  data-strings={JSON.stringify(statusStrings(ui(locale)))}
+  aria-live="polite"
+>
+  <span class="status-dot text-ink-faint" aria-hidden="true"></span>
+  <span data-text>&nbsp;</span>
+</span>
+
+<script>
+  import { getStatus, type DayHours } from '../lib/hours';
+
+  type Strings = {
+    openNow: string;
+    closesAt: string;
+    closed: string;
+    opensToday: string;
+    opensTomorrow: string;
+    opensOn: string;
+    days: Record<string, string>;
+  };
+
+  function render(el: HTMLElement) {
+    const hours = JSON.parse(el.dataset.hours!) as DayHours[];
+    const s = JSON.parse(el.dataset.strings!) as Strings;
+    const status = getStatus(hours);
+    const dot = el.querySelector<HTMLElement>('.status-dot')!;
+    const text = el.querySelector<HTMLElement>('[data-text]')!;
+
+    if (status.isOpen) {
+      text.textContent = `${s.openNow} · ${s.closesAt.replace('{time}', status.closesAt!)}`;
+      dot.style.color = 'var(--color-open)';
+    } else if (status.nextOpen) {
+      const { when, time, day } = status.nextOpen;
+      const next =
+        when === 'today' ? s.opensToday : when === 'tomorrow' ? s.opensTomorrow : s.opensOn.replace('{day}', s.days[day]);
+      text.textContent = `${s.closed} · ${next.replace('{time}', time)}`;
+      dot.style.color = 'var(--color-ink-faint)';
+    } else {
+      text.textContent = s.closed;
+    }
+    el.dataset.state = status.isOpen ? 'open' : 'closed';
+  }
+
+  const badges = document.querySelectorAll<HTMLElement>('[data-open-status]');
+  const update = () => badges.forEach(render);
+  update();
+  setInterval(update, 60_000);
+  document.addEventListener('visibilitychange', () => document.visibilityState === 'visible' && update());
+</script>

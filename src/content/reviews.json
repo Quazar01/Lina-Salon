@@ -1,0 +1,34 @@
+{
+  "reviews": [
+    {
+      "author": "Samira El Idrissi",
+      "rating": 5,
+      "language": "nl",
+      "quote": "Eindelijk een salon waar ik me echt op mijn gemak voel. Lina neemt de tijd en luistert naar wat je wil, in plaats van haar eigen ding te doen."
+    },
+    {
+      "author": "هناء ب.",
+      "rating": 5,
+      "language": "ar",
+      "quote": "أفضل صالون في أنتويرب. المكان نظيف ومريح، والخصوصية تامة. صبغتي طلعت تمامًا كما أردت."
+    },
+    {
+      "author": "Claire Vandamme",
+      "rating": 5,
+      "language": "fr",
+      "quote": "Balayage magnifique, très naturel. Accueil chaleureux et des conseils honnêtes sur ce qui irait à mes cheveux."
+    },
+    {
+      "author": "Nour Haddad",
+      "rating": 5,
+      "language": "en",
+      "quote": "Sent a WhatsApp in the morning and had a slot the same afternoon. My colour came out exactly like the photo I showed."
+    },
+    {
+      "author": "Ilse Peeters",
+      "rating": 4,
+      "language": "nl",
+      "quote": "Mijn dochter en ik gaan er al jaren. Altijd een fijne sfeer en eerlijke prijzen. Op zaterdag wel even op voorhand bellen."
+    }
+  ]
+}
