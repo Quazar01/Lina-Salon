@@ -1,0 +1,19 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  n: number;
+  /** e.g. "{n} van 5 sterren" */
+  label: string;
+}
+const { n, label } = Astro.props;
+const rating = Math.max(0, Math.min(5, Math.round(n)));
+---
+
+<p class="flex gap-0.5 text-accent" role="img" aria-label={label.replace('{n}', String(rating))} dir="ltr">
+  {
+    Array.from({ length: 5 }, (_, i) => (
+      <Icon name="ph:star-fill" class:list={['size-4', i >= rating && 'text-rosewood']} aria-hidden="true" />
+    ))
+  }
+</p>

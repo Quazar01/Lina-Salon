@@ -1,0 +1,119 @@
+---
+import { Icon } from 'astro-icon/components';
+import { ui, type Locale } from '../lib/i18n';
+
+interface Props {
+  locale: Locale;
+  count: number;
+}
+const { locale, count } = Astro.props;
+const t = ui(locale);
+---
+
+<dialog
+  id="lightbox"
+  class="lightbox m-0 h-svh max-h-none w-full max-w-none bg-transparent p-0 text-cream"
+  aria-label={t.gallery.title}
+  data-counter={t.gallery.counter}
+  data-count={count}
+>
+  <div class="flex h-full flex-col pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]">
+    <div class="flex items-center justify-between px-4 py-3">
+      <p class="text-sm text-cream/75" data-lb-counter aria-live="polite"></p>
+      <button
+        type="button"
+        class="btn size-11 min-h-11 px-0 text-cream hover:bg-white/10"
+        data-lb-close
+        aria-label={t.gallery.close}
+      >
+        <Icon name="ph:x" class="size-6" aria-hidden="true" />
+      </button>
+    </div>
+
+    <figure class="lightbox-figure relative flex min-h-0 flex-1 touch-pan-y items-center justify-center px-4" data-lb-figure>
+      <img data-lb-img alt="" class="max-h-full max-w-full rounded-xl object-contain select-none" draggable="false" />
+    </figure>
+
+    <div class="flex items-center justify-center gap-4 py-4">
+      <button type="button" class="btn size-12 min-h-12 px-0 text-cream hover:bg-white/10" data-lb-prev aria-label={t.gallery.prev}>
+        <Icon name="ph:caret-left" class="flip-rtl size-6" aria-hidden="true" />
+      </button>
+      <button type="button" class="btn size-12 min-h-12 px-0 text-cream hover:bg-white/10" data-lb-next aria-label={t.gallery.next}>
+        <Icon name="ph:caret-right" class="flip-rtl size-6" aria-hidden="true" />
+      </button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.getElementById('lightbox') as HTMLDialogElement | null;
+  const triggers = [...document.querySelectorAll<HTMLButtonElement>('[data-lightbox-index]')];
+
+  if (dialog && triggers.length) {
+    const img = dialog.querySelector<HTMLImageElement>('[data-lb-img]')!;
+    const figure = dialog.querySelector<HTMLElement>('[data-lb-figure]')!;
+    const counter = dialog.querySelector<HTMLElement>('[data-lb-counter]')!;
+    const rtl = document.documentElement.dir === 'rtl';
+    let index = 0;
+
+    const show = (i: number) => {
+      index = (i + triggers.length) % triggers.length;
+      const t = triggers[index];
+      img.src = t.dataset.full!;
+      img.alt = t.dataset.alt!;
+      counter.textContent = dialog.dataset.counter!.replace('{i}', String(index + 1)).replace('{n}', String(triggers.length));
+    };
+
+    triggers.forEach((t, i) =>
+      t.addEventListener('click', () => {
+        // Grow out of the tapped thumbnail rather than the screen centre.
+        const r = t.getBoundingClientRect();
+        dialog.style.setProperty('--origin', `${r.left + r.width / 2}px ${r.top + r.height / 2}px`);
+        show(i);
+        dialog.showModal();
+      }),
+    );
+
+    // Buttons are logical (RTL flips their order and icons), arrow keys are physical.
+    dialog.querySelector('[data-lb-prev]')!.addEventListener('click', () => show(index - 1));
+    dialog.querySelector('[data-lb-next]')!.addEventListener('click', () => show(index + 1));
+    dialog.querySelector('[data-lb-close]')!.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', (e) => e.target === figure && dialog.close());
+
+    // Keyboard: no animation, just swap (keyboard actions should feel instant).
+    dialog.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') show(index + (rtl ? -1 : 1));
+      if (e.key === 'ArrowLeft') show(index + (rtl ? 1 : -1));
+    });
+
+    // Swipe: distance or a quick flick (velocity) is enough.
+    let startX = 0;
+    let startT = 0;
+    let dragging = false;
+    figure.addEventListener('pointerdown', (e) => {
+      if (dragging || e.pointerType === 'mouse') return;
+      dragging = true;
+      startX = e.clientX;
+      startT = performance.now();
+      img.style.transition = 'none';
+    });
+    figure.addEventListener('pointermove', (e) => {
+      if (!dragging) return;
+      img.style.transform = `translateX(${(e.clientX - startX) * 0.9}px)`;
+    });
+    const end = (e: PointerEvent) => {
+      if (!dragging) return;
+      dragging = false;
+      const dx = e.clientX - startX;
+      const velocity = Math.abs(dx) / (performance.now() - startT);
+      img.style.transition = 'transform 220ms var(--ease-out)';
+      img.style.transform = '';
+      if (Math.abs(dx) > 60 || (Math.abs(dx) > 20 && velocity > 0.11)) {
+        const forward = dx < 0 !== rtl;
+        show(index + (forward ? 1 : -1));
+      }
+    };
+    figure.addEventListener('pointerup', end);
+    figure.addEventListener('pointercancel', end);
+  }
+</script>

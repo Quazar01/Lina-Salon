@@ -1,0 +1,414 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Rose & ivory: warm pink-tinted neutrals + one dusty-rose accent. No pure black, no purple. */
+  --color-cream: #fdf8f5; /* ivory page background */
+  --color-blush: #f9ebe6; /* soft panels */
+  --color-petal: #f1dcd5; /* hairlines, chips */
+  --color-rosewood: #e2c2b9; /* stronger borders, empty stars */
+  --color-ink: #3b2a2d; /* warm plum-brown text */
+  --color-ink-soft: #6b5358;
+  --color-ink-faint: #7a5e64; /* AA: 5.5:1 ivory, 5.0:1 blush */
+  --color-accent: #a94d64; /* dusty rose, AA: 5.1:1 ivory, 4.6:1 blush */
+  --color-accent-deep: #8f3f52;
+  --color-accent-soft: #f7e1e4;
+  --color-open: #5f8063; /* sage, only for the "open" dot */
+
+  --font-display: 'Fraunces Variable', 'Iowan Old Style', Georgia, serif;
+  --font-sans: 'Outfit Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-arabic: 'Tajawal', 'Noto Sans Arabic', 'Segoe UI', system-ui, sans-serif;
+  --font-arabic-display: 'El Messiri Variable', 'Tajawal', serif;
+
+  /* Emil Kowalski's curves: strong ease-out for UI, drawer curve for sheets */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  --radius-card: 1.75rem;
+  --header-h: 4rem;
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: calc(var(--header-h) + env(safe-area-inset-top, 0px) + 1rem);
+    background: var(--color-cream);
+    color-scheme: light;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-ink);
+    background: var(--color-cream);
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Arabic: its own typeface, more line height, never letter-spaced (it breaks joining). */
+  :lang(ar) {
+    --font-sans: var(--font-arabic);
+    --font-display: var(--font-arabic-display);
+    font-family: var(--font-arabic);
+    letter-spacing: 0 !important;
+  }
+  html:lang(ar) body {
+    line-height: 1.85;
+  }
+  /* ...and Latin text inside an Arabic page (wordmark, addresses) switches back. */
+  :lang(ar) :is(:lang(nl), :lang(fr), :lang(en)) {
+    --font-sans: 'Outfit Variable', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Fraunces Variable', 'Iowan Old Style', Georgia, serif;
+    font-family: var(--font-sans);
+  }
+
+  /* Controls are not content: no long-press selection, no double-tap delay. */
+  a,
+  button,
+  [role='button'] {
+    touch-action: manipulation;
+  }
+  button,
+  [role='button'],
+  .btn {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 0.5rem;
+  }
+
+  img {
+    -webkit-touch-callout: none;
+  }
+}
+
+@layer components {
+  .container-page {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 72rem;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 640px) {
+    .container-page {
+      padding-inline: 1.5rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container-page {
+      padding-inline: 2rem;
+    }
+  }
+
+  /* Headings: light, fully "soft" Fraunces reads graceful rather than bookish. */
+  .display {
+    font-family: var(--font-display);
+    font-variation-settings: 'SOFT' 100;
+    font-weight: 380;
+    letter-spacing: -0.015em;
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+  /* *Accent words* (written between asterisks in the CMS) turn rose and italic. */
+  .display em,
+  .accent-em em {
+    font-style: italic;
+    font-weight: 360;
+    color: var(--color-accent);
+  }
+  :lang(ar) .display,
+  .display:lang(ar) {
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  /* Arabic has no italics: the accent word only changes colour. */
+  :lang(ar) .display em,
+  .display em:lang(ar),
+  :lang(ar) .accent-em em {
+    font-style: normal;
+    font-weight: inherit;
+  }
+
+  /* Eyebrows carry a small four-point sparkle, the one recurring ornament. */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55em;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+  .eyebrow::before {
+    content: '';
+    width: 0.85em;
+    height: 0.85em;
+    flex-shrink: 0;
+    background: currentColor;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8 0c.5 4.2 3.8 7.5 8 8-4.2.5-7.5 3.8-8 8-.5-4.2-3.8-7.5-8-8 4.2-.5 7.5-3.8 8-8z'/%3E%3C/svg%3E")
+      center / contain no-repeat;
+  }
+  :lang(ar) .eyebrow,
+  .eyebrow:lang(ar) {
+    font-size: 0.95rem;
+    text-transform: none;
+  }
+
+  /* Arch frames: the classic salon-mirror shape, used for the hero and "about" photos. */
+  .arch {
+    border-radius: 999px 999px var(--radius-card) var(--radius-card);
+  }
+
+  /* Soft panels: tinted sections float as rounded sheets instead of hard full-bleed bands. */
+  .panel {
+    margin-inline: 0.5rem;
+    border-radius: 2rem;
+  }
+  @media (min-width: 768px) {
+    .panel {
+      margin-inline: 1rem;
+      border-radius: 3rem;
+    }
+  }
+
+  /* Hero glow: two blurred blush blooms, static (no animated gradients). */
+  .bloom {
+    background:
+      radial-gradient(38rem 28rem at 85% 20%, rgb(247 225 228 / 0.95), transparent 70%),
+      radial-gradient(30rem 24rem at 5% 90%, rgb(249 235 230 / 0.9), transparent 70%);
+  }
+
+  .prose-warm p + p {
+    margin-top: 1em;
+  }
+
+  /* Buttons: press feedback on :active (works for touch), hover only where hover exists. */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 3rem;
+    padding-inline: 1.25rem;
+    border-radius: 999px;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1;
+    white-space: nowrap;
+    transition:
+      transform 160ms var(--ease-out),
+      background-color 200ms ease,
+      border-color 200ms ease,
+      color 200ms ease;
+  }
+  .btn:active {
+    transform: scale(0.97);
+  }
+  .btn-primary {
+    background: var(--color-accent);
+    color: var(--color-cream);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.22),
+      0 12px 28px -14px rgb(169 77 100 / 0.65);
+  }
+  .btn-quiet {
+    background: rgb(255 255 255 / 0.55);
+    color: var(--color-ink);
+    border: 1px solid var(--color-petal);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover {
+      background: var(--color-accent-deep);
+    }
+    .btn-quiet:hover {
+      border-color: var(--color-rosewood);
+      background: rgb(255 255 255 / 0.9);
+    }
+  }
+
+  /* Glass surfaces: blur + 1px inner edge so it reads as a material, not a smudge. */
+  .glass {
+    background: rgb(253 248 245 / 0.8);
+    backdrop-filter: blur(16px) saturate(1.4);
+    -webkit-backdrop-filter: blur(16px) saturate(1.4);
+    border: 1px solid rgb(255 255 255 / 0.65);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.75),
+      0 18px 40px -20px rgb(143 63 82 / 0.4);
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Directional icons (arrows, carets) mirror in RTL. */
+  [dir='rtl'] .flip-rtl {
+    transform: scaleX(-1);
+  }
+}
+
+/* ---------- Motion ---------- */
+
+/* Scroll reveal: only when JS is running, so content never stays hidden. */
+html.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 600ms var(--ease-out),
+    transform 600ms var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 70ms);
+}
+html.js [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Hero load-in: short stagger, text only (the image paints immediately). */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+.rise {
+  animation: rise 560ms var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+
+/* Open/closed dot: the one perpetual micro-animation, done on a pseudo-element with transform. */
+.status-dot {
+  position: relative;
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: currentColor;
+}
+[data-state='open'] .status-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: currentColor;
+  animation: breathe 2.6s var(--ease-out) infinite;
+}
+@keyframes breathe {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  70%,
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+/* Native <dialog> sheets. Enter uses the drawer curve; exit is faster than enter. */
+dialog.sheet {
+  opacity: 0;
+  transform: translateY(-12px);
+  transition:
+    opacity 160ms ease,
+    transform 180ms var(--ease-out),
+    overlay 180ms allow-discrete,
+    display 180ms allow-discrete;
+}
+dialog.sheet[open] {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 240ms var(--ease-out),
+    transform 380ms var(--ease-drawer),
+    overlay 380ms allow-discrete,
+    display 380ms allow-discrete;
+}
+@starting-style {
+  dialog.sheet[open] {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}
+dialog.sheet::backdrop {
+  background: rgb(59 42 45 / 0);
+  transition:
+    background-color 200ms ease,
+    overlay 200ms allow-discrete,
+    display 200ms allow-discrete;
+}
+dialog.sheet[open]::backdrop {
+  background: rgb(59 42 45 / 0.35);
+}
+@starting-style {
+  dialog.sheet[open]::backdrop {
+    background: rgb(59 42 45 / 0);
+  }
+}
+
+/* Lightbox opens from the tapped photo (origin set in JS). */
+dialog.lightbox .lightbox-figure {
+  transform-origin: var(--origin, 50% 50%);
+  transition:
+    transform 320ms var(--ease-out),
+    opacity 220ms var(--ease-out);
+}
+@starting-style {
+  dialog.lightbox[open] .lightbox-figure {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+}
+dialog.lightbox::backdrop {
+  background: rgb(44 28 32 / 0.92);
+}
+
+/* Menu links stagger in when the sheet opens. */
+dialog.sheet .stagger > * {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 300ms var(--ease-out),
+    transform 300ms var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 45ms + 80ms);
+}
+dialog.sheet[open] .stagger > * {
+  opacity: 1;
+  transform: none;
+}
+@starting-style {
+  dialog.sheet[open] .stagger > * {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js [data-reveal],
+  dialog.sheet,
+  dialog.sheet[open],
+  dialog.sheet .stagger > *,
+  dialog.lightbox .lightbox-figure {
+    transform: none !important;
+  }
+  .rise {
+    animation-name: none;
+  }
+  [data-state='open'] .status-dot::after {
+    animation: none;
+  }
+}

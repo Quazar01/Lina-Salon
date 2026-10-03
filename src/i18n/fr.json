@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "title": "Lina Salon · Salon de coiffure pour femmes à Anvers",
+    "description": "Lina Salon est un salon de coiffure réservé aux femmes à Anvers. Coupe, couleur, brushing et coiffures de mariée. Appelez ou envoyez un WhatsApp pour prendre rendez-vous."
+  },
+  "nav": {
+    "services": "Services",
+    "about": "À propos",
+    "gallery": "Photos",
+    "reviews": "Avis",
+    "visit": "Venir",
+    "menu": "Menu",
+    "close": "Fermer",
+    "skip": "Aller au contenu"
+  },
+  "lang": {
+    "label": "Choisir la langue"
+  },
+  "cta": {
+    "call": "Appeler",
+    "whatsapp": "WhatsApp",
+    "route": "Itinéraire",
+    "book": "Prendre rendez-vous"
+  },
+  "whatsappMessage": "Bonjour Lina Salon, je voudrais prendre rendez-vous.",
+  "hero": {
+    "eyebrow": "Salon de coiffure pour femmes"
+  },
+  "status": {
+    "openNow": "Ouvert",
+    "closesAt": "ferme à {time}",
+    "closed": "Fermé",
+    "opensToday": "ouvre aujourd'hui à {time}",
+    "opensTomorrow": "ouvre demain à {time}",
+    "opensOn": "ouvre {day} à {time}"
+  },
+  "days": {
+    "mon": "lundi",
+    "tue": "mardi",
+    "wed": "mercredi",
+    "thu": "jeudi",
+    "fri": "vendredi",
+    "sat": "samedi",
+    "sun": "dimanche"
+  },
+  "services": {
+    "eyebrow": "Services & tarifs",
+    "title": "Ce que nous faisons pour vous",
+    "intro": "Chaque prestation commence par un court échange sur ce que vous souhaitez. Le prix dépend de la longueur et de l'épaisseur de vos cheveux ; nous vous le disons toujours avant de commencer.",
+    "from": "à partir de",
+    "minutes": "{n} min"
+  },
+  "about": {
+    "eyebrow": "À propos"
+  },
+  "gallery": {
+    "eyebrow": "Photos",
+    "title": "Au salon",
+    "open": "Agrandir la photo",
+    "prev": "Photo précédente",
+    "next": "Photo suivante",
+    "close": "Fermer",
+    "counter": "{i} sur {n}"
+  },
+  "reviews": {
+    "eyebrow": "Avis",
+    "title": "Ce que disent nos clientes",
+    "seeAll": "Tous les avis sur Google",
+    "rating": "{n} étoiles sur 5"
+  },
+  "visit": {
+    "eyebrow": "Venir",
+    "title": "Passez nous voir",
+    "address": "Adresse",
+    "hours": "Heures d'ouverture",
+    "today": "Aujourd'hui",
+    "closed": "Fermé",
+    "phone": "Téléphone",
+    "mapLoad": "Afficher la carte",
+    "mapNotice": "La carte provient de Google Maps. Des données ne sont partagées avec Google qu'après avoir appuyé sur le bouton.",
+    "mapTitle": "Carte indiquant l'emplacement de Lina Salon"
+  },
+  "footer": {
+    "follow": "Suivez-nous",
+    "rights": "Tous droits réservés."
+  }
+}

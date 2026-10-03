@@ -1,0 +1,78 @@
+---
+import { Icon } from 'astro-icon/components';
+import { ui, type Locale } from '../lib/i18n';
+import { routeHref, telHref, whatsappHref } from '../lib/site';
+
+interface Props {
+  locale: Locale;
+  links: readonly (readonly [string, string])[];
+}
+const { locale, links } = Astro.props;
+const t = ui(locale);
+---
+
+<dialog
+  id="mobile-menu"
+  class="sheet bloom m-0 h-svh max-h-none w-full max-w-none bg-cream p-0 text-ink"
+  aria-label={t.nav.menu}
+>
+  <div class="flex h-full flex-col pt-[env(safe-area-inset-top)] pb-[calc(env(safe-area-inset-bottom)+1.5rem)]">
+    <div class="container-page flex h-(--header-h) items-center justify-between">
+      <span class="display text-[1.6rem] leading-none" dir="ltr" lang="en">Lina</span>
+      <button type="button" class="btn -me-2 size-11 min-h-11 px-0" data-menu-close aria-label={t.nav.close}>
+        <Icon name="ph:x" class="size-6" aria-hidden="true" />
+      </button>
+    </div>
+
+    <nav class="container-page mt-6 flex-1 overflow-y-auto overscroll-contain" aria-label={t.nav.menu}>
+      <ul class="stagger divide-y divide-petal border-y border-petal">
+        {
+          links.map(([id, label], i) => (
+            <li style={`--i:${i}`}>
+              <a
+                href={`#${id}`}
+                data-menu-link
+                class="flex items-center justify-between py-4 text-[1.75rem] leading-tight active:text-accent display"
+              >
+                {label}
+                <Icon name="ph:arrow-right" class="flip-rtl size-5 text-ink-faint" aria-hidden="true" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="container-page stagger grid grid-cols-3 gap-2 pt-6">
+      <a href={telHref} class="btn btn-quiet min-h-14 flex-col gap-1 text-sm" style="--i:5">
+        <Icon name="ph:phone" class="size-5" aria-hidden="true" />{t.cta.call}
+      </a>
+      <a href={whatsappHref(t.whatsappMessage)} class="btn btn-primary min-h-14 flex-col gap-1 text-sm" style="--i:6">
+        <Icon name="ph:whatsapp-logo" class="size-5" aria-hidden="true" />{t.cta.whatsapp}
+      </a>
+      <a href={routeHref} class="btn btn-quiet min-h-14 flex-col gap-1 text-sm" style="--i:7" target="_blank" rel="noopener">
+        <Icon name="ph:navigation-arrow" class="size-5" aria-hidden="true" />{t.cta.route}
+      </a>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.getElementById('mobile-menu') as HTMLDialogElement | null;
+  if (dialog) {
+    document.querySelectorAll('[data-menu-open]').forEach((b) => b.addEventListener('click', () => dialog.showModal()));
+    dialog.querySelectorAll('[data-menu-close]').forEach((b) => b.addEventListener('click', () => dialog.close()));
+    // Close first, then let the anchor scroll happen on the page behind.
+    dialog.querySelectorAll<HTMLAnchorElement>('[data-menu-link]').forEach((a) =>
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        dialog.close();
+        const target = document.querySelector(a.hash);
+        requestAnimationFrame(() => target?.scrollIntoView({ block: 'start' }));
+        history.replaceState(null, '', a.hash);
+      }),
+    );
+    // The sheet is for small screens only; close it if the viewport grows.
+    matchMedia('(min-width: 1024px)').addEventListener('change', (e) => e.matches && dialog.close());
+  }
+</script>

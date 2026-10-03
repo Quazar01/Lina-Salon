@@ -1,0 +1,39 @@
+---
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Hero from '../../components/Hero.astro';
+import Services from '../../components/Services.astro';
+import About from '../../components/About.astro';
+import Gallery from '../../components/Gallery.astro';
+import Reviews from '../../components/Reviews.astro';
+import Visit from '../../components/Visit.astro';
+import Footer from '../../components/Footer.astro';
+import ContactBar from '../../components/ContactBar.astro';
+import { getImage } from 'astro:assets';
+import home from '../../content/home.json';
+import { LOCALES, ui, type Locale } from '../../lib/i18n';
+import { resolveImage } from '../../lib/images';
+
+export function getStaticPaths() {
+  return LOCALES.map((lang) => ({ params: { lang } }));
+}
+
+const locale = Astro.params.lang as Locale;
+const t = ui(locale);
+const heroImage = resolveImage(home.heroImage);
+const og = heroImage ? await getImage({ src: heroImage, width: 1200, format: 'jpg' }) : undefined;
+---
+
+<Base locale={locale} title={t.meta.title} description={t.meta.description} image={og?.src}>
+  <Header locale={locale} />
+  <main id="main">
+    <Hero locale={locale} />
+    <Services locale={locale} />
+    <About locale={locale} />
+    <Gallery locale={locale} />
+    <Reviews locale={locale} />
+    <Visit locale={locale} />
+  </main>
+  <Footer locale={locale} />
+  <ContactBar locale={locale} />
+</Base>
