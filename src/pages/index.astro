@@ -12,6 +12,8 @@ import { LOCALES, LOCALE_META, DEFAULT_LOCALE } from '../lib/i18n';
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Lina Salon · Antwerpen</title>
+    {/* Preview deploys with placeholder content must stay out of search engines. */}
+    {import.meta.env.PUBLIC_NOINDEX === 'true' && <meta name="robots" content="noindex, nofollow" />}
     <meta name="description" content="Lina Salon, kapsalon voor vrouwen in Antwerpen · Salon de coiffure pour femmes à Anvers · صالون شعر للنساء في أنتويرب · Women-only hair salon in Antwerp" />
     <meta name="theme-color" content="#fdf8f5" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />

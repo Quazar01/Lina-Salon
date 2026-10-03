@@ -85,6 +85,8 @@ const jsonLd = {
     {preloads.map((href) => <link rel="preload" href={href} as="font" type="font/woff2" crossorigin />)}
 
     <title>{title}</title>
+    {/* Preview deploys with placeholder content must stay out of search engines. */}
+    {import.meta.env.PUBLIC_NOINDEX === 'true' && <meta name="robots" content="noindex, nofollow" />}
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     {LOCALES.map((l) => <link rel="alternate" hreflang={LOCALE_META[l].bcp47} href={new URL(`/${l}/`, site).href} />)}
