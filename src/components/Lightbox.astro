@@ -12,17 +12,17 @@ const t = ui(locale);
 
 <dialog
   id="lightbox"
-  class="lightbox m-0 h-svh max-h-none w-full max-w-none bg-transparent p-0 text-cream"
+  class="lightbox m-0 h-svh max-h-none w-full max-w-none bg-transparent p-0 text-white"
   aria-label={t.gallery.title}
   data-counter={t.gallery.counter}
   data-count={count}
 >
   <div class="flex h-full flex-col pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]">
     <div class="flex items-center justify-between px-4 py-3">
-      <p class="text-sm text-cream/75" data-lb-counter aria-live="polite"></p>
+      <p class="text-sm text-white/75" data-lb-counter aria-live="polite"></p>
       <button
         type="button"
-        class="btn size-11 min-h-11 px-0 text-cream hover:bg-white/10"
+        class="btn size-11 min-h-11 px-0 text-white hover:bg-white/10"
         data-lb-close
         aria-label={t.gallery.close}
       >
@@ -35,10 +35,10 @@ const t = ui(locale);
     </figure>
 
     <div class="flex items-center justify-center gap-4 py-4">
-      <button type="button" class="btn size-12 min-h-12 px-0 text-cream hover:bg-white/10" data-lb-prev aria-label={t.gallery.prev}>
+      <button type="button" class="btn size-12 min-h-12 px-0 text-white hover:bg-white/10" data-lb-prev aria-label={t.gallery.prev}>
         <Icon name="ph:caret-left" class="flip-rtl size-6" aria-hidden="true" />
       </button>
-      <button type="button" class="btn size-12 min-h-12 px-0 text-cream hover:bg-white/10" data-lb-next aria-label={t.gallery.next}>
+      <button type="button" class="btn size-12 min-h-12 px-0 text-white hover:bg-white/10" data-lb-next aria-label={t.gallery.next}>
         <Icon name="ph:caret-right" class="flip-rtl size-6" aria-hidden="true" />
       </button>
     </div>

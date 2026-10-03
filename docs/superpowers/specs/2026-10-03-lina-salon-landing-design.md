@@ -119,3 +119,8 @@ Feedback: "make the design feminine and warm, all the customers are women."
 - **Shapes and ornament:** arch-framed hero and "about" photos with an offset outline, a static blush bloom behind the hero, rounded panels for tinted sections, a rounded footer top, a sparkle ornament on eyebrows, and a large rose quotation mark on the featured review.
 - **Copy:** the hero eyebrow now leads with "for women" (e.g. "Kapsalon voor vrouwen").
 - **Re-verified:** 18 unit tests pass. Lighthouse mobile: NL 97 / AR 92 performance, 100 accessibility, best practices and SEO, CLS 0. No horizontal scroll at 375px.
+
+## Addition: "glam" theme derived from the salon's signage
+- **Same content, second design.** It is selected by `PUBLIC_THEME=glam` at build time (`src/lib/theme.ts`, `<html data-theme>`), so the CMS, translations and tests are shared.
+- **Taken from the three signs:** a berry background (`#6b1442`, brightened after feedback that the first wine-black version looked grim), fuchsia glow and glitter, metallic gold as the single accent, a gold script "Lina" logo (Great Vibes) with a crown and "HAIR SALON" spaced caps, heavy uppercase headlines like "SALON DAMES" (Outfit 800; Lalezar for Arabic), a pink brushstroke label, a gold heart rule, a light streak, and the portrait cropped from the glass sign.
+- **Deliberate exceptions to the taste skill:** gold is the accent and fuchsia is only atmosphere; gradient text is used on the logo only.

@@ -1,5 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
+import Wordmark from './Wordmark.astro';
+import { THEME } from '../lib/theme';
 import home from '../content/home.json';
 import { LOCALES, LOCALE_META, localize, ui, type Locale } from '../lib/i18n';
 import { settings, socials, telHref } from '../lib/site';
@@ -14,12 +16,11 @@ const year = new Date().getFullYear();
 ---
 
 <!-- Bottom padding on phones keeps the footer clear of the fixed action bar. -->
-<footer class="rounded-t-[2.5rem] bg-ink pt-16 md:rounded-t-[3.5rem] pb-[calc(6.5rem+env(safe-area-inset-bottom))] text-cream/80 md:pb-12">
+<footer class="rounded-t-[2.5rem] bg-footer pt-16 md:rounded-t-[3.5rem] pb-[calc(6.5rem+env(safe-area-inset-bottom))] text-footer-ink/80 md:pb-12">
   <div class="container-page grid gap-10 md:grid-cols-12">
     <div class="md:col-span-5">
-      <p class="flex items-baseline gap-1.5 text-cream" dir="ltr" lang="en">
-        <span class="display text-3xl leading-none">Lina</span>
-        <span class="text-xs font-semibold uppercase tracking-[0.22em] text-cream/60">Salon</span>
+      <p class="text-footer-ink">
+        <Wordmark variant="full" size={THEME === 'glam' ? 'text-6xl' : 'text-3xl'} />
       </p>
       <p class="mt-4 max-w-[36ch]" lang={womenOnly.lang} dir={womenOnly.dir}>{womenOnly.text}</p>
     </div>
@@ -28,7 +29,7 @@ const year = new Date().getFullYear();
       <address class="not-italic" dir="ltr" lang="nl-BE">
         {settings.street}<br />{settings.postcode} {settings.city}
       </address>
-      <a href={telHref} class="mt-3 inline-block tabular-nums text-cream underline decoration-cream/30 underline-offset-4 hover:decoration-cream" dir="ltr">
+      <a href={telHref} class="mt-3 inline-block tabular-nums text-footer-ink underline decoration-footer-ink/30 underline-offset-4 hover:decoration-footer-ink" dir="ltr">
         {settings.phone}
       </a>
     </div>
@@ -36,7 +37,7 @@ const year = new Date().getFullYear();
     {
       socials.length > 0 && (
         <div class="md:col-span-3">
-          <p class="text-sm text-cream/60">{t.footer.follow}</p>
+          <p class="text-sm text-footer-ink/60">{t.footer.follow}</p>
           <ul class="mt-3 flex gap-2">
             {socials.map((s) => (
               <li>
@@ -45,7 +46,7 @@ const year = new Date().getFullYear();
                   target="_blank"
                   rel="noopener"
                   aria-label={s.label}
-                  class="btn size-11 min-h-11 border border-cream/15 px-0 text-cream hover:border-cream/40"
+                  class="btn size-11 min-h-11 border border-footer-ink/15 px-0 text-footer-ink hover:border-footer-ink/40"
                 >
                   <Icon name={s.icon} class="size-5" aria-hidden="true" />
                 </a>
@@ -57,13 +58,13 @@ const year = new Date().getFullYear();
     }
   </div>
 
-  <div class="container-page mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-cream/10 pt-6 text-sm text-cream/55">
+  <div class="container-page mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-footer-ink/10 pt-6 text-sm text-footer-ink/55">
     <p>© {year} Lina Salon. {t.footer.rights}</p>
     <ul class="flex gap-4" dir="ltr">
       {
         LOCALES.map((l) => (
           <li>
-            <a href={`/${l}/`} lang={LOCALE_META[l].bcp47} data-lang-link={l} class:list={['hover:text-cream', l === locale && 'text-cream']}>
+            <a href={`/${l}/`} lang={LOCALE_META[l].bcp47} data-lang-link={l} class:list={['hover:text-footer-ink', l === locale && 'text-footer-ink']}>
               {LOCALE_META[l].label}
             </a>
           </li>

@@ -9,9 +9,15 @@ import elMessiriArabic from '@fontsource-variable/el-messiri/files/el-messiri-ar
 import '@fontsource/tajawal/400.css';
 import '@fontsource/tajawal/500.css';
 import '@fontsource/tajawal/700.css';
+// Glam theme fonts (declared always, downloaded only when the glam theme uses them)
+import '@fontsource/great-vibes/latin-400.css';
+import greatVibes from '@fontsource/great-vibes/files/great-vibes-latin-400-normal.woff2?url';
+import '@fontsource/lalezar/400.css';
+import lalezarArabic from '@fontsource/lalezar/files/lalezar-arabic-400-normal.woff2?url';
 import '../styles/global.css';
 
 import { LOCALES, LOCALE_META, type Locale } from '../lib/i18n';
+import { THEME, THEME_COLOR } from '../lib/theme';
 import { hours, settings } from '../lib/site';
 import { DAYS } from '../lib/hours';
 
@@ -26,6 +32,11 @@ const { locale, title, description, image } = Astro.props;
 const meta = LOCALE_META[locale];
 const site = Astro.site ?? new URL('https://linasalon.be');
 const canonical = new URL(`/${locale}/`, site).href;
+// Heading fonts of this page's theme + script, preloaded so the hero doesn't shift when they swap in.
+const preloads =
+  THEME === 'glam'
+    ? [greatVibes, ...(meta.dir === 'rtl' ? [lalezarArabic] : [])]
+    : [meta.dir === 'rtl' ? elMessiriArabic : frauncesLatin];
 const ogImage = image ? new URL(image, site).href : undefined;
 
 const schemaDay: Record<string, string> = {
@@ -62,7 +73,7 @@ const jsonLd = {
 ---
 
 <!doctype html>
-<html lang={meta.bcp47} dir={meta.dir}>
+<html lang={meta.bcp47} dir={meta.dir} data-theme={THEME}>
   <head>
     <meta charset="utf-8" />
     <meta
@@ -71,15 +82,15 @@ const jsonLd = {
     />
     <script is:inline>document.documentElement.classList.add('js');</script>
     {/* Preload the heading font of this page's script so the hero doesn't shift when it swaps in. */}
-    <link rel="preload" href={meta.dir === 'rtl' ? elMessiriArabic : frauncesLatin} as="font" type="font/woff2" crossorigin />
+    {preloads.map((href) => <link rel="preload" href={href} as="font" type="font/woff2" crossorigin />)}
 
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     {LOCALES.map((l) => <link rel="alternate" hreflang={LOCALE_META[l].bcp47} href={new URL(`/${l}/`, site).href} />)}
     <link rel="alternate" hreflang="x-default" href={new URL('/', site).href} />
-    <meta name="theme-color" content="#fdf8f5" />
-    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content={THEME_COLOR[THEME]} />
+    <meta name="color-scheme" content={THEME === 'glam' ? 'dark' : 'light'} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
     <meta property="og:type" content="website" />

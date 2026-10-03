@@ -1,0 +1,26 @@
+---
+// Small gold crown from the sign logo. Gradient keeps it metallic like the script.
+interface Props {
+  class?: string;
+  style?: string;
+}
+const { class: className, style } = Astro.props;
+const id = `crown-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<svg class={className} style={style} viewBox="0 0 48 36" aria-hidden="true">
+  <defs>
+    <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fde7aa" />
+      <stop offset="0.55" stop-color="#e8b04a" />
+      <stop offset="1" stop-color="#b47a28" />
+    </linearGradient>
+  </defs>
+  <g fill={`url(#${id})`}>
+    <path d="M4 12l9 9 11-17 11 17 9-9-4 18H8z" />
+    <rect x="8" y="31" width="32" height="4" rx="1.5" />
+    <circle cx="4" cy="10" r="3" />
+    <circle cx="24" cy="3" r="3" />
+    <circle cx="44" cy="10" r="3" />
+  </g>
+</svg>

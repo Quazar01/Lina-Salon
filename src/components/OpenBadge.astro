@@ -12,7 +12,7 @@ const { locale, class: className } = Astro.props;
 <!-- Filled in on the client: "open now" depends on the visitor's current time, not build time. -->
 <span
   class:list={[
-    'inline-flex min-h-8 items-center gap-2 rounded-full border border-petal bg-white/60 px-3 text-sm font-medium text-ink-soft opacity-0 transition-opacity duration-300 data-[state]:opacity-100',
+    'inline-flex min-h-8 items-center gap-2 rounded-full border border-petal bg-surface px-3 text-sm font-medium text-ink-soft opacity-0 transition-opacity duration-300 data-[state]:opacity-100',
     className,
   ]}
   data-open-status

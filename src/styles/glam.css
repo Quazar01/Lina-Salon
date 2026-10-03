@@ -1,0 +1,227 @@
+/* =====================================================================
+   GLAM THEME: derived from the salon's signage.
+   Wine/plum night, fuchsia glow as atmosphere, metallic gold as the one accent,
+   script "Lina" logo with crown, heavy uppercase headlines, gold heart rules.
+   Enabled with PUBLIC_THEME=glam (see src/lib/theme.ts).
+   ===================================================================== */
+html[data-theme='glam'] {
+  --color-cream: #6b1442; /* page: vivid berry, like the door sign */
+  --color-blush: #7d1d52; /* panels: a step lighter */
+  --color-petal: #9a3568; /* hairlines */
+  --color-rosewood: #d4a65a; /* soft gold outlines, empty stars */
+  --color-ink: #fcf0f4; /* 10.5:1 on page */
+  --color-ink-soft: #f3d6e2; /* 8.6:1 */
+  --color-ink-faint: #e9c0d2; /* 7.2:1 page, 6.0:1 panel */
+  --color-accent: #e8b04a; /* gold, 6.0:1 page, 5.0:1 panel */
+  --color-accent-deep: #f6d37f; /* light gold: prices, hover */
+  --color-accent-soft: #8a2259;
+  --color-open: #a8f0b4;
+  --color-surface: rgb(255 255 255 / 0.1);
+  --color-pill: #e8b04a;
+  --color-pill-ink: #2a0718;
+  --color-footer: #4a0d2e;
+  --color-footer-ink: #fcf0f4;
+  --font-arabic-display: 'Lalezar', 'Tajawal', sans-serif;
+  color-scheme: dark;
+}
+
+/* Glitter + fuchsia glow behind everything: one fixed, non-interactive layer (no repaint on scroll). */
+html[data-theme='glam'],
+html[data-theme='glam'] body {
+  background: #6b1442;
+}
+html[data-theme='glam'] body {
+  background: transparent;
+}
+html[data-theme='glam'] body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(1.5px 1.5px at 8% 14%, rgb(251 227 161 / 0.8), transparent),
+    radial-gradient(1px 1px at 22% 62%, rgb(255 255 255 / 0.6), transparent),
+    radial-gradient(2px 2px at 37% 28%, rgb(255 120 190 / 0.7), transparent),
+    radial-gradient(1px 1px at 51% 84%, rgb(251 227 161 / 0.7), transparent),
+    radial-gradient(1.5px 1.5px at 66% 9%, rgb(255 255 255 / 0.55), transparent),
+    radial-gradient(1px 1px at 74% 47%, rgb(251 227 161 / 0.6), transparent),
+    radial-gradient(2px 2px at 88% 71%, rgb(255 120 190 / 0.6), transparent),
+    radial-gradient(1px 1px at 93% 22%, rgb(255 255 255 / 0.5), transparent),
+    radial-gradient(1.5px 1.5px at 15% 92%, rgb(255 120 190 / 0.5), transparent),
+    radial-gradient(60rem 40rem at 100% -10%, rgb(255 70 160 / 0.45), transparent 60%),
+    radial-gradient(45rem 35rem at 0% 40%, rgb(232 176 74 / 0.12), transparent 65%),
+    radial-gradient(50rem 40rem at -10% 110%, rgb(255 70 160 / 0.3), transparent 60%),
+    #6b1442;
+}
+html[data-theme='glam'] ::selection {
+  background: #e0177d;
+  color: #fff;
+}
+
+@layer components {
+  /* Headlines like the sign's "SALON DAMES": heavy, uppercase, accent words in gold. */
+  html[data-theme='glam'] .display {
+    font-family: var(--font-sans);
+    font-variation-settings: normal;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.005em;
+    line-height: 1.02;
+  }
+  html[data-theme='glam'] .display em {
+    font-style: normal;
+    font-weight: inherit;
+  }
+  /* Lalezar has a single (heavy) weight: never synthesize bold. */
+  html[data-theme='glam'] :lang(ar) .display,
+  html[data-theme='glam'] .display:lang(ar) {
+    font-family: var(--font-arabic-display);
+    font-weight: 400;
+    font-synthesis: none;
+    line-height: 1.35;
+  }
+
+  /* Metallic gold button with the signs' pink glow underneath. */
+  html[data-theme='glam'] .btn-primary {
+    color: #2a0718;
+    background: linear-gradient(180deg, #f9dc93 0%, #e8b04a 52%, #c18a33 100%);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.55),
+      inset 0 -1px 0 rgb(120 70 10 / 0.35),
+      0 12px 30px -12px rgb(224 23 125 / 0.65);
+  }
+  html[data-theme='glam'] .btn-quiet {
+    border-color: rgb(232 176 74 / 0.35);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    html[data-theme='glam'] .btn-primary:hover {
+      background: linear-gradient(180deg, #fbe3a1 0%, #efbd5c 52%, #c99439 100%);
+    }
+    html[data-theme='glam'] .btn-quiet:hover {
+      background: rgb(255 255 255 / 0.1);
+      border-color: rgb(232 176 74 / 0.6);
+    }
+  }
+
+  html[data-theme='glam'] .glass {
+    background: rgb(107 20 66 / 0.78);
+    border-color: rgb(232 176 74 / 0.22);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.08),
+      0 18px 40px -18px rgb(224 23 125 / 0.45);
+  }
+
+  html[data-theme='glam'] .panel {
+    border: 1px solid rgb(232 176 74 / 0.14);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.04),
+      0 40px 90px -50px rgb(224 23 125 / 0.55);
+  }
+
+  html[data-theme='glam'] .bloom {
+    background:
+      radial-gradient(40rem 30rem at 90% 0%, rgb(224 23 125 / 0.28), transparent 65%),
+      radial-gradient(30rem 24rem at 0% 100%, rgb(232 176 74 / 0.1), transparent 70%);
+  }
+
+  /* ---- Glam-only pieces ---- */
+
+  /* Script logo in metallic gold (the one place gradient text is allowed: it is the brand mark). */
+  .script-logo {
+    font-family: var(--font-script);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0;
+    text-transform: none;
+    color: #e8b04a;
+    background: linear-gradient(180deg, #fde7aa 8%, #e8b04a 46%, #b47a28 72%, #f4cf7a 96%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 10px rgb(224 23 125 / 0.35));
+  }
+
+  /* The "Lina" signature under the About text uses the logo script. */
+  html[data-theme='glam'] .signature {
+    font-family: var(--font-script);
+    font-style: normal;
+    font-size: 3.5rem;
+    line-height: 1;
+    color: var(--color-accent);
+  }
+
+  /* Spaced caps under the logo ("HAIR SALON"). */
+  .logo-caps {
+    font-family: 'Outfit Variable', ui-sans-serif, sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+  }
+
+  /* Pink brushstroke label, as on the glass sign ("للسيدات"). */
+  .brush {
+    position: relative;
+    isolation: isolate;
+    display: inline-block;
+    padding: 0.4em 1.2em 0.45em;
+    color: #fde7aa;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .brush::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(100deg, #c8106b, #e0177d 55%, #b80d61);
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 40' preserveAspectRatio='none'%3E%3Cpath d='M6 9c18-4 40-3 62-5 30-2 62 0 96-2 12 0 26 1 32 4 4 6 2 14 3 21-1 6-6 9-13 9-30 2-60-1-90 2-26 2-52 1-78 0-8-1-14-3-16-8-2-6-1-13 0-17 1-3 2-3 4-4z'/%3E%3Cpath d='M2 14l6-1-3 3zM194 30l5 2-6 1zM20 37l14 1-12 1z'/%3E%3C/svg%3E")
+      center / 100% 100% no-repeat;
+    transform: rotate(-1.5deg);
+  }
+  :lang(ar) .brush,
+  .brush:lang(ar) {
+    text-transform: none;
+    letter-spacing: 0;
+    font-family: var(--font-arabic-display);
+    font-weight: 400;
+  }
+
+  /* Gold rule with a heart in the middle (mailbox & door signs). */
+  .gold-rule {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--color-accent);
+  }
+  .gold-rule::before,
+  .gold-rule::after {
+    content: '';
+    height: 1px;
+    flex: 1;
+    background: linear-gradient(90deg, transparent, currentColor 25%, currentColor 75%, transparent);
+  }
+}
+
+/* Sparkles twinkle gently: the glam theme's only perpetual motion besides the "open" dot. */
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.twinkle {
+  animation: twinkle 3.2s ease-in-out infinite;
+  animation-delay: var(--d, 0s);
+}
+@media (prefers-reduced-motion: reduce) {
+  .twinkle {
+    animation: none;
+  }
+}

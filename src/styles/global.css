@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import './glam.css'; /* inert unless <html data-theme="glam"> */
 
 @theme {
   /* Rose & ivory: warm pink-tinted neutrals + one dusty-rose accent. No pure black, no purple. */
@@ -13,11 +14,21 @@
   --color-accent-deep: #8f3f52;
   --color-accent-soft: #f7e1e4;
   --color-open: #5f8063; /* sage, only for the "open" dot */
+  --color-surface: rgb(255 255 255 / 0.55); /* translucent chips, badges, quiet buttons */
+  --color-pill: #3b2a2d; /* selected language */
+  --color-pill-ink: #fdf8f5;
+  --color-footer: #3b2a2d;
+  --color-footer-ink: #fdf8f5;
+  /* Glam-only brand colours (unused by the soft theme) */
+  --color-fuchsia: #e0177d;
+  --color-gold-light: #fbe3a1;
+  --color-gold-dark: #a8742a;
 
   --font-display: 'Fraunces Variable', 'Iowan Old Style', Georgia, serif;
   --font-sans: 'Outfit Variable', ui-sans-serif, system-ui, sans-serif;
   --font-arabic: 'Tajawal', 'Noto Sans Arabic', 'Segoe UI', system-ui, sans-serif;
   --font-arabic-display: 'El Messiri Variable', 'Tajawal', serif;
+  --font-script: 'Great Vibes', 'Snell Roundhand', cursive; /* glam logo only */
 
   /* Emil Kowalski's curves: strong ease-out for UI, drawer curve for sheets */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
@@ -224,7 +235,7 @@
       0 12px 28px -14px rgb(169 77 100 / 0.65);
   }
   .btn-quiet {
-    background: rgb(255 255 255 / 0.55);
+    background: var(--color-surface);
     color: var(--color-ink);
     border: 1px solid var(--color-petal);
   }

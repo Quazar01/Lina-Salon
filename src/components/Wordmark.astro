@@ -1,0 +1,31 @@
+---
+import { THEME } from '../lib/theme';
+import Crown from './Crown.astro';
+
+interface Props {
+  /** compact: header & menu. full: footer & glam hero (adds the "HAIR SALON" line in glam). */
+  variant?: 'compact' | 'full';
+  /** Tailwind text-size class for the main word. */
+  size?: string;
+  class?: string;
+}
+const { variant = 'compact', size = 'text-[1.6rem]', class: className } = Astro.props;
+---
+
+{
+  THEME === 'glam' ? (
+    // The signs' logo: gold script "Lina", a crown over the "a", spaced "HAIR SALON" below.
+    <span class:list={['inline-flex flex-col items-center leading-none', className]} dir="ltr" lang="en">
+      <span class="relative inline-block pe-[0.12em]">
+        <span class:list={['script-logo block pt-[0.08em]', size]}>Lina</span>
+        <Crown class="absolute top-[-0.05em] right-[-0.02em] w-[0.42em] text-accent" />
+      </span>
+      {variant === 'full' && <span class="logo-caps mt-1 ps-[0.42em] text-[0.7rem] text-ink-soft">Hair Salon</span>}
+    </span>
+  ) : (
+    <span class:list={['flex items-baseline gap-1.5', className]} dir="ltr" lang="en">
+      <span class:list={['display leading-none', size]}>Lina</span>{' '}
+      <span class="text-[0.7rem] font-semibold uppercase tracking-[0.22em] opacity-70 max-[359px]:hidden">Salon</span>
+    </span>
+  )
+}

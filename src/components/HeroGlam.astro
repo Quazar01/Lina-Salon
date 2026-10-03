@@ -1,0 +1,123 @@
+---
+// Hero for the glam theme, composed like the salon's door & glass signs:
+// portrait with glowing hair, gold script logo with crown, pink brushstroke label, gold heart rule.
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import OpenBadge from './OpenBadge.astro';
+import Sparkle from './Sparkle.astro';
+import Wordmark from './Wordmark.astro';
+import portrait from '../assets/brand/glam-portrait.jpg';
+import home from '../content/home.json';
+import { emphasize, localize, ui, type Locale } from '../lib/i18n';
+import { telHref, whatsappHref } from '../lib/site';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = ui(locale);
+const title = localize(home.heroTitle, locale);
+const text = localize(home.heroText, locale);
+const womenOnly = localize(home.womenOnly, locale);
+---
+
+<section class="relative isolate overflow-hidden" aria-labelledby="hero-title">
+  <div class="md:mx-auto md:max-w-[72rem] md:px-6 lg:px-8 md:grid md:min-h-[calc(100svh-var(--header-h))] md:grid-cols-12 md:items-center md:gap-8">
+    <!-- Portrait: full-bleed on phones (fades into the night below), right half on desktop (fades to the left). -->
+    <div class="relative md:order-2 md:col-span-6 md:col-start-7 md:self-stretch">
+      <div
+        class="relative h-[68svh] max-h-[34rem] md:absolute md:inset-y-0 md:start-0 md:-end-[max(2rem,calc((100vw-72rem)/2+2rem))] md:h-auto md:max-h-none"
+      >
+        <Image
+          src={portrait}
+          alt=""
+          widths={[400, 600]}
+          sizes="(min-width: 768px) 50vw, 100vw"
+          loading="eager"
+          fetchpriority="high"
+          class="portrait size-full object-cover object-[70%_25%]"
+        />
+        <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_70%_30%,transparent,rgb(107_20_66/0.3))]" aria-hidden="true"></div>
+      </div>
+      <Sparkle class="twinkle absolute top-[12%] start-[10%] size-5 text-gold-light md:start-[6%]" style="--d:0s" />
+      <Sparkle class="twinkle absolute top-[30%] end-[8%] size-3 text-accent" style="--d:1.1s" />
+      <Sparkle class="twinkle absolute top-[52%] start-[22%] size-3 text-[#ff78be]" style="--d:2s" />
+    </div>
+
+    <!-- Brand + message -->
+    <div class="container-page relative -mt-40 pb-16 text-center md:order-1 md:col-span-6 md:mt-0 md:px-0 md:py-16 md:text-start">
+      <Wordmark variant="full" size="text-[5.25rem] sm:text-[6rem] lg:text-[7.5rem]" class="rise drop-shadow-[0_6px_30px_rgb(224_23_125/0.45)]" />
+
+      <p class="rise mt-6" style="--i:1">
+        <span class="brush text-[0.95rem] md:text-base">{t.hero.eyebrow}</span>
+      </p>
+
+      <p class="gold-rule rise mx-auto mt-6 max-w-[18rem] md:mx-0" style="--i:1" aria-hidden="true">
+        <Icon name="ph:heart-fill" class="size-4" />
+      </p>
+
+      <h1
+        id="hero-title"
+        class="display rise mt-6 text-[2.1rem] text-ink sm:text-[2.6rem] lg:text-[3.2rem]"
+        style="--i:2"
+        lang={title.lang}
+        dir={title.dir}
+        set:html={emphasize(title.text)}
+      />
+
+      <p class="rise mx-auto mt-4 max-w-[34ch] text-lg text-ink-soft md:mx-0" style="--i:3" lang={text.lang} dir={text.dir}>
+        {text.text}
+      </p>
+
+      <div class="rise mt-8 flex flex-wrap justify-center gap-3 md:justify-start" style="--i:4">
+        <a href={whatsappHref(t.whatsappMessage)} class="btn btn-primary min-h-13 px-6">
+          <Icon name="ph:whatsapp-logo" class="size-5" aria-hidden="true" />
+          {t.cta.whatsapp}
+        </a>
+        <a href={telHref} class="btn btn-quiet min-h-13 px-6">
+          <Icon name="ph:phone" class="size-5" aria-hidden="true" />
+          {t.cta.call}
+        </a>
+      </div>
+
+      <div class="rise mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-ink-soft md:justify-start" style="--i:5">
+        <OpenBadge locale={locale} />
+        <span class="inline-flex items-center gap-1.5" lang={womenOnly.lang} dir={womenOnly.dir}>
+          <Icon name="ph:crown-simple-fill" class="size-4 text-accent" aria-hidden="true" />
+          {womenOnly.text}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Light streak sweeping through, like the swoosh under the logo on the door sign. -->
+  <svg class="pointer-events-none absolute inset-x-0 bottom-0 h-24 w-full md:h-32" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="streak" x1="0" x2="1">
+        <stop offset="0" stop-color="#e0177d" stop-opacity="0" />
+        <stop offset="0.35" stop-color="#e0177d" />
+        <stop offset="0.7" stop-color="#e8b04a" />
+        <stop offset="1" stop-color="#e8b04a" stop-opacity="0" />
+      </linearGradient>
+      <filter id="glow" x="-10%" y="-200%" width="120%" height="500%"><feGaussianBlur stdDeviation="4" /></filter>
+    </defs>
+    <path d="M0 100 C300 40 600 120 900 60 S1150 30 1200 40" stroke="url(#streak)" stroke-width="6" fill="none" filter="url(#glow)" opacity="0.7" />
+    <path d="M0 100 C300 40 600 120 900 60 S1150 30 1200 40" stroke="url(#streak)" stroke-width="1.5" fill="none" />
+  </svg>
+</section>
+
+<style>
+  /* Portrait melts into the night: bottom fade on phones, start-edge fade on desktop. */
+  .portrait {
+    mask-image: linear-gradient(to bottom, black 55%, transparent 98%);
+  }
+  @media (min-width: 768px) {
+    .portrait {
+      mask-image: linear-gradient(to right, transparent 0%, black 35%), linear-gradient(to bottom, black 80%, transparent);
+      mask-composite: intersect;
+    }
+    :global([dir='rtl']) .portrait {
+      mask-image: linear-gradient(to left, transparent 0%, black 35%), linear-gradient(to bottom, black 80%, transparent);
+    }
+  }
+</style>

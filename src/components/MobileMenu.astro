@@ -1,5 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
+import Wordmark from './Wordmark.astro';
+import { THEME } from '../lib/theme';
 import { ui, type Locale } from '../lib/i18n';
 import { routeHref, telHref, whatsappHref } from '../lib/site';
 
@@ -18,7 +20,7 @@ const t = ui(locale);
 >
   <div class="flex h-full flex-col pt-[env(safe-area-inset-top)] pb-[calc(env(safe-area-inset-bottom)+1.5rem)]">
     <div class="container-page flex h-(--header-h) items-center justify-between">
-      <span class="display text-[1.6rem] leading-none" dir="ltr" lang="en">Lina</span>
+      <Wordmark size={THEME === 'glam' ? 'text-[2.25rem]' : 'text-[1.6rem]'} />
       <button type="button" class="btn -me-2 size-11 min-h-11 px-0" data-menu-close aria-label={t.nav.close}>
         <Icon name="ph:x" class="size-6" aria-hidden="true" />
       </button>
