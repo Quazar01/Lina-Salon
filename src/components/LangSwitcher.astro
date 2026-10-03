@@ -10,7 +10,7 @@ const t = ui(locale);
 ---
 
 <nav aria-label={t.lang.label} class:list={['shrink-0', className]}>
-  <ul class="flex items-center rounded-full border border-petal bg-white/50 p-1" dir="ltr">
+  <ul class="flex items-center rounded-full border border-petal bg-surface p-1" dir="ltr">
     {
       LOCALES.map((l) => (
         <li>
@@ -22,7 +22,7 @@ const t = ui(locale);
             aria-current={l === locale ? 'true' : undefined}
             class:list={[
               'flex h-9 min-w-9 items-center justify-center rounded-full px-2 text-sm font-medium transition-[background-color,color] duration-200',
-              l === locale ? 'bg-ink text-cream' : 'text-ink-soft hover:text-ink',
+              l === locale ? 'bg-pill text-pill-ink' : 'text-ink-soft hover:text-ink',
               l === 'ar' && 'font-arabic text-base leading-none',
             ]}
           >
