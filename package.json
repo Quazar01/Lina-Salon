@@ -10,8 +10,8 @@
     "test": "vitest run",
     "check:translations": "node scripts/check-translations.mjs",
     "cms": "npx decap-server",
-    "dev:glam": "astro dev --mode glam",
-    "build:glam": "astro build --mode glam"
+    "dev:soft": "astro dev --mode soft",
+    "build:soft": "astro build --mode soft"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

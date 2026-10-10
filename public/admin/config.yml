@@ -5,7 +5,7 @@
 
 backend:
   name: github
-  repo: YOUR-GITHUB-USERNAME/lina-salon # TODO: replace with the real repository
+  repo: Quazar01/Lina-Salon
   branch: main
   commit_messages:
     update: 'cms: update {{slug}}'
@@ -16,8 +16,9 @@ backend:
 local_backend: true
 
 locale: ar
-site_url: https://linasalon.be
-display_url: https://linasalon.be
+# Update both to the real domain once it is connected.
+site_url: https://lina-salon-glam.netlify.app
+display_url: https://lina-salon-glam.netlify.app
 
 media_folder: src/assets/uploads
 public_folder: /src/assets/uploads

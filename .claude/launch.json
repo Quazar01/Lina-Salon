@@ -14,11 +14,11 @@
       "port": 4321
     },
     {
-      "name": "lina-glam",
+      "name": "lina-soft",
       "runtimeExecutable": "npm",
       "runtimeArgs": [
         "run",
-        "dev:glam",
+        "dev:soft",
         "--",
         "--port",
         "4323"

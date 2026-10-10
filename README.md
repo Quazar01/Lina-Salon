@@ -81,10 +81,10 @@ The same content can be shown in two designs, chosen with the `PUBLIC_THEME` env
 
 | Theme | What it looks like | Run locally | Build |
 | --- | --- | --- | --- |
-| `soft` (default) | Rose & ivory, arch photo frames | `npm run dev` | `npm run build` |
-| `glam` | Taken from the salon's signs: berry background, pink glow, gold script logo with crown | `npm run dev:glam` | `npm run build:glam` |
+| `glam` (default, chosen by the owner) | Taken from the salon's signs: berry background, pink glow, gold script logo with crown | `npm run dev` | `npm run build` |
+| `soft` | Rose & ivory, arch photo frames | `npm run dev:soft` | `npm run build:soft` |
 
-On Netlify, set `PUBLIC_THEME=glam` under Site configuration → Environment variables to use the glam design. Glam-only code: `src/styles/glam.css`, `src/components/HeroGlam.astro`, `Wordmark.astro`, `Crown.astro`; the hero portrait is `src/assets/brand/glam-portrait.jpg`, cropped from the glass-sign artwork. Only one `astro dev` server can run at a time, so stop one before starting the other.
+The live site uses glam. To switch to soft, set `PUBLIC_THEME=soft` under Netlify → Site configuration → Environment variables. Glam-only code: `src/styles/glam.css`, `src/components/HeroGlam.astro`, `Wordmark.astro`, `Crown.astro`; the hero portrait is `src/assets/brand/glam-portrait.jpg`, cropped from the glass-sign artwork. Only one `astro dev` server can run at a time, so stop one before starting the other.
 
 ## Design notes
 

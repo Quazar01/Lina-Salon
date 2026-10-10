@@ -4,6 +4,9 @@
 
 [build.environment]
   NODE_VERSION = "22"
+  # Keep search engines away while the site still has placeholder content
+  # (made-up reviews, placeholder phone numbers). Remove this line at launch.
+  PUBLIC_NOINDEX = "true"
 
 [[headers]]
   for = "/_astro/*"
