@@ -1,15 +1,16 @@
 {
-  "heroTitle": {
-    "ar": "شعركِ بين *أيادٍ أمينة*.",
-    "nl": "Je haar, in *goede handen*.",
-    "fr": "Vos cheveux, entre de *bonnes mains*.",
-    "en": "Your hair, in *good hands*."
-  },
+  "heroImage": "/src/assets/uploads/hero.jpg",
   "heroText": {
     "ar": "قصّ وصبغ وتصفيف في صالون هادئ في أنتويرب، للنساء فقط.",
     "nl": "Knippen, kleuren en stylen in een rustig salon in Antwerpen, alleen voor vrouwen.",
     "fr": "Coupe, couleur et coiffage dans un salon calme à Anvers, réservé aux femmes.",
     "en": "Cuts, colour and styling in a calm salon in Antwerp, just for women."
+  },
+  "heroImageAlt": {
+    "ar": "زبونة بشعر بني طويل مموّج داخل لينا صالون",
+    "nl": "Klant met lang, golvend bruin haar in Lina Salon",
+    "fr": "Cliente aux longs cheveux bruns ondulés chez Lina Salon",
+    "en": "Client with long, wavy brown hair at Lina Salon"
   },
   "womenOnly": {
     "ar": "للنساء فقط: مساحة خاصة بلا رجال داخل الصالون.",
@@ -17,31 +18,30 @@
     "fr": "Réservé aux femmes : un espace privé, sans hommes dans le salon.",
     "en": "Women only: a private space with no men in the salon."
   },
-  "heroImage": "/src/assets/uploads/hero.jpg",
-  "heroImageAlt": {
-    "ar": "زبونة بشعر بني طويل مموّج داخل لينا صالون",
-    "nl": "Klant met lang, golvend bruin haar in Lina Salon",
-    "fr": "Cliente aux longs cheveux bruns ondulés chez Lina Salon",
-    "en": "Client with long, wavy brown hair at Lina Salon"
-  },
   "aboutTitle": {
     "ar": "هنا تأخذين *وقتكِ*",
     "nl": "Hier neem je *de tijd*",
     "fr": "Ici, on prend *le temps*",
     "en": "Take *your time* here"
   },
+  "aboutSignature": "Lina",
+  "aboutImage": "/src/assets/uploads/screenshot-2026-10-10-154748.png",
   "aboutText": {
-    "ar": "افتتحت لينا الصالون عام 2011 بفكرة واحدة: مكان تأخذ فيه المرأة وقتها. لا استعجال بين المواعيد، ولا دخول للرجال، وخصوصية تتيح لكِ خلع حجابكِ والاسترخاء.\n\nما زالت لينا تعمل بنفسها كل يوم مع فريق صغير درّبته بنفسها. معظم الزبونات يعدن إلينا منذ سنوات، والكثيرات يأتين مع بناتهن.",
+    "ar": "افتتحت لينا الصالون عام 2016 بفكرة واحدة: مكان تأخذ فيه المرأة وقتها. لا استعجال بين المواعيد، ولا دخول للرجال، وخصوصية تتيح لكِ خلع حجابكِ والاسترخاء.\n\nثلاثون عاما خبرة وما زالت لينا تعمل بنفسها كل يوم لتعطي شعرك المظهر, اللون, والتسريحة التي ترين نفسك تستحقينها. معظم الزبونات يعدن إلينا منذ سنوات، والكثيرات يأتين مع بناتهن.",
     "nl": "Lina opende het salon in 2011 met één idee: een plek waar vrouwen de tijd mogen nemen. Geen haast tussen afspraken, geen mannen die binnenlopen, en genoeg privacy om je hoofddoek af te doen en tot rust te komen.\n\nZe staat nog elke dag zelf in het salon, samen met een klein team dat ze zelf heeft opgeleid. De meeste klanten komen al jaren terug, en velen nemen hun dochters mee.",
     "fr": "Lina a ouvert le salon en 2011 avec une idée simple : un lieu où les femmes peuvent prendre leur temps. Pas de précipitation entre les rendez-vous, pas d'hommes qui entrent, et assez d'intimité pour retirer son foulard et se détendre.\n\nElle coiffe encore elle-même chaque jour, avec une petite équipe qu'elle a formée. La plupart des clientes reviennent depuis des années, et beaucoup viennent avec leurs filles.",
     "en": "Lina opened the salon in 2011 with one idea: a place where women can take their time. No rush between appointments, no men walking in, and enough privacy to take off your headscarf and relax.\n\nShe still works in the salon every day, together with a small team she trained herself. Most clients have been coming back for years, and many bring their daughters."
   },
-  "aboutSignature": "Lina",
-  "aboutImage": "/src/assets/uploads/about.jpg",
   "aboutImageAlt": {
     "ar": "لينا تصفّف شعر زبونة",
     "nl": "Lina die het haar van een klant stylet",
     "fr": "Lina en train de coiffer une cliente",
     "en": "Lina styling a client's hair"
+  },
+  "heroTitle": {
+    "ar": "شعركِ بين *أيادٍ أمينة*.",
+    "nl": "Je haar, in *goede handen*.",
+    "fr": "Vos cheveux, entre de *bonnes mains*.",
+    "en": "Your hair, in *good hands*."
   }
 }
