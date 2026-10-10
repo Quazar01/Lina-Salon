@@ -67,12 +67,3 @@ export function emphasize(text: string): string {
   return text.replace(/[&<>"']/g, (c) => entities[c]).replace(/\*([^*\n]+)\*/g, '<em>$1</em>');
 }
 
-export function formatPrice(amount: number, locale: Locale): string {
-  return new Intl.NumberFormat(LOCALE_META[locale].bcp47, {
-    style: 'currency',
-    currency: 'EUR',
-    maximumFractionDigits: Number.isInteger(amount) ? 0 : 2,
-    // Western digits everywhere: prices must match what's said on the phone.
-    numberingSystem: 'latn',
-  }).format(amount);
-}

@@ -1,6 +1,8 @@
 # Lina Salon
 
-One-page website for **Lina Salon**, a women-only hair salon in Antwerpen. It comes in Dutch, French, Arabic (right-to-left) and English, and includes an Arabic editor so the salon owner can update prices, hours, photos and texts herself.
+One-page website for **Lina Salon**, a women-only hair salon in Antwerpen. It comes in Dutch, French, Arabic (right-to-left) and English, and includes an Arabic editor so the salon owner can update services, hours, photos and texts herself.
+
+**Page order:** hero → About → Services (names only, no prices) → Instagram & TikTok → Visit (address, hours, map). Reviews are built but hidden until real ones are ready.
 
 - **Site:** [Astro](https://astro.build) (static) + Tailwind CSS v4, hosted free on Netlify
 - **Editor:** [Decap CMS](https://decapcms.org) at `/admin/`, saving to this GitHub repo. Every save triggers a rebuild, and the change is live in about 2 minutes.
@@ -11,9 +13,10 @@ One-page website for **Lina Salon**, a women-only hair salon in Antwerpen. It co
 All content is **placeholder** right now. Replace it via the CMS or in `src/content/`:
 
 - [ ] Real phone number, WhatsApp number, address and opening hours (`settings.json`)
-- [ ] Real photos: hero, "about", gallery (`src/assets/uploads/`, or upload via the CMS)
+- [ ] Real "about" photo (`src/assets/uploads/`, or upload via the CMS)
+- [ ] Instagram and TikTok profile links in the CMS settings. The «تابعينا» (Follow us) section only appears once at least one is filled in. Optionally pick featured Instagram posts by pasting their links.
 - [ ] The real "About" story (the current text, including the year 2011, is invented)
-- [ ] **Real reviews only.** The five reviews are made up and must not go live. Copy real ones from Google, with permission.
+- [ ] **Real reviews only.** The five reviews are made up and are hidden. Replace them with real ones from Google (with permission), then switch on «إظهار آراء الزبونات على الموقع» (Show reviews) in the CMS settings.
 - [ ] Real Google reviews link and social media links (empty = icon hidden)
 - [ ] Set the real domain in `astro.config.mjs` (`site`), `public/robots.txt` and `public/admin/config.yml`
 - [ ] Set the GitHub repo in `public/admin/config.yml` (`backend.repo`)
@@ -67,7 +70,7 @@ Interface strings (buttons, day names, section titles) live in `src/i18n/{nl,fr,
 ```
 src/content/        Content edited via the CMS (JSON)
 src/i18n/           Interface strings per language
-src/components/     One component per section (Hero, Services, Gallery, ...)
+src/components/     One component per section (Hero, About, Services, SocialFeed, Visit, ...)
 src/lib/            i18n helpers, opening-hours logic, image resolving
 src/assets/uploads/ Images (CMS uploads land here; Astro optimises them)
 public/admin/       Decap CMS: config.yml (Arabic labels) + Arabic UI locale

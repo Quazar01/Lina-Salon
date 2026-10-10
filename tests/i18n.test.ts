@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { emphasize, formatPrice, localize } from '../src/lib/i18n';
+import { emphasize, localize } from '../src/lib/i18n';
 
 describe('localize', () => {
   const field = { ar: 'قص الشعر', nl: 'Knippen', fr: '', en: '  ' };
@@ -34,10 +34,3 @@ describe('emphasize', () => {
   });
 });
 
-describe('formatPrice', () => {
-  it('formats euros per locale with western digits', () => {
-    expect(formatPrice(38, 'nl')).toMatch(/€\s?38/);
-    expect(formatPrice(38, 'ar')).toMatch(/38/);
-    expect(formatPrice(12.5, 'en')).toBe('€12.50');
-  });
-});

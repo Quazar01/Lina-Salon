@@ -20,10 +20,7 @@
             "nl": "",
             "fr": "",
             "en": ""
-          },
-          "price": 38,
-          "from": false,
-          "duration": 60
+          }
         },
         {
           "name": {
@@ -37,10 +34,7 @@
             "nl": "",
             "fr": "",
             "en": ""
-          },
-          "price": 26,
-          "from": false,
-          "duration": 30
+          }
         },
         {
           "name": {
@@ -54,10 +48,7 @@
             "nl": "",
             "fr": "",
             "en": ""
-          },
-          "price": 9,
-          "from": false,
-          "duration": 10
+          }
         },
         {
           "name": {
@@ -71,10 +62,7 @@
             "nl": "",
             "fr": "",
             "en": ""
-          },
-          "price": 19,
-          "from": false,
-          "duration": 30
+          }
         }
       ]
     },
@@ -98,10 +86,7 @@
             "nl": "",
             "fr": "",
             "en": ""
-          },
-          "price": 45,
-          "from": true,
-          "duration": 75
+          }
         },
         {
           "name": {
@@ -115,10 +100,7 @@
             "nl": "",
             "fr": "",
             "en": ""
-          },
-          "price": 62,
-          "from": true,
-          "duration": 90
+          }
         },
         {
           "name": {
@@ -132,10 +114,7 @@
             "nl": "",
             "fr": "",
             "en": ""
-          },
-          "price": 78,
-          "from": true,
-          "duration": 120
+          }
         },
         {
           "name": {
@@ -149,10 +128,7 @@
             "nl": "Natuurlijk, zongebleekt effect, inclusief toner.",
             "fr": "Effet naturel et ensoleillé, patine incluse.",
             "en": "Natural, sun-lightened look, toner included."
-          },
-          "price": 98,
-          "from": true,
-          "duration": 150
+          }
         }
       ]
     },
@@ -176,10 +152,7 @@
             "nl": "",
             "fr": "",
             "en": ""
-          },
-          "price": 27,
-          "from": false,
-          "duration": 40
+          }
         },
         {
           "name": {
@@ -193,10 +166,7 @@
             "nl": "",
             "fr": "",
             "en": ""
-          },
-          "price": 34,
-          "from": false,
-          "duration": 45
+          }
         },
         {
           "name": {
@@ -210,10 +180,7 @@
             "nl": "Voor trouwfeesten, feestjes en speciale dagen.",
             "fr": "Pour les mariages, les fêtes et les grandes occasions.",
             "en": "For weddings, parties and special days."
-          },
-          "price": 48,
-          "from": true,
-          "duration": 60
+          }
         }
       ]
     },
@@ -237,10 +204,7 @@
             "nl": "Glad haar met minder pluis, maandenlang.",
             "fr": "Des cheveux lisses et moins de frisottis pendant des mois.",
             "en": "Smoother hair with less frizz, for months."
-          },
-          "price": 135,
-          "from": true,
-          "duration": 150
+          }
         },
         {
           "name": {
@@ -254,10 +218,7 @@
             "nl": "",
             "fr": "",
             "en": ""
-          },
-          "price": 18,
-          "from": false,
-          "duration": 20
+          }
         },
         {
           "name": {
@@ -271,10 +232,7 @@
             "nl": "",
             "fr": "",
             "en": ""
-          },
-          "price": 15,
-          "from": false,
-          "duration": 15
+          }
         }
       ]
     },
@@ -298,10 +256,7 @@
             "nl": "We bepalen samen je kapsel ruim voor de grote dag.",
             "fr": "Nous choisissons ensemble votre coiffure bien avant le grand jour.",
             "en": "We settle on your style together well before the big day."
-          },
-          "price": 165,
-          "from": true,
-          "duration": 0
+          }
         },
         {
           "name": {
@@ -315,10 +270,7 @@
             "nl": "",
             "fr": "",
             "en": ""
-          },
-          "price": 45,
-          "from": true,
-          "duration": 0
+          }
         }
       ]
     },
@@ -342,10 +294,7 @@
             "nl": "",
             "fr": "",
             "en": ""
-          },
-          "price": 10,
-          "from": false,
-          "duration": 15
+          }
         },
         {
           "name": {
@@ -359,10 +308,7 @@
             "nl": "",
             "fr": "",
             "en": ""
-          },
-          "price": 6,
-          "from": false,
-          "duration": 10
+          }
         }
       ]
     }

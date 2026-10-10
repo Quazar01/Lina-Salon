@@ -124,3 +124,9 @@ Feedback: "make the design feminine and warm, all the customers are women."
 - **Same content, second design.** It is selected by `PUBLIC_THEME=glam` at build time (`src/lib/theme.ts`, `<html data-theme>`), so the CMS, translations and tests are shared.
 - **Taken from the three signs:** a berry background (`#6b1442`, brightened after feedback that the first wine-black version looked grim), fuchsia glow and glitter, metallic gold as the single accent, a gold script "Lina" logo (Great Vibes) with a crown and "HAIR SALON" spaced caps, heavy uppercase headlines like "SALON DAMES" (Outfit 800; Lalezar for Arabic), a pink brushstroke label, a gold heart rule, a light streak, and the portrait cropped from the glass sign.
 - **Deliberate exceptions to the taste skill:** gold is the accent and fuchsia is only atmosphere; gradient text is used on the logo only.
+
+## Revision: layout changes requested by the owner
+- **About now comes before Services.**
+- **Services show names and descriptions only.** Prices and durations were removed from the page, the content and the CMS. The intro now invites visitors to ask about the price.
+- **The photo gallery was replaced by an Instagram & TikTok section** (`SocialFeed.astro`). Instagram shows the owner's featured posts (official post embeds; links pasted in the CMS), or the profile embed when none are picked. TikTok shows its creator embed page, framed at a fixed height because TikTok's script resize proved unreliable. Nothing loads until the visitor taps the button (GDPR); the choice is remembered on the device. Handles and post links are validated and rebuilt before they reach the markup.
+- **Reviews are hidden** behind `settings.showReviews` (a CMS toggle, default off) until real reviews are ready.

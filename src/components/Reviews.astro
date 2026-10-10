@@ -3,7 +3,7 @@ import { Icon } from 'astro-icon/components';
 import Stars from './Stars.astro';
 import reviewsData from '../content/reviews.json';
 import { LOCALE_META, isLocale, ui, type Locale } from '../lib/i18n';
-import { settings } from '../lib/site';
+import { settings, showReviews } from '../lib/site';
 
 interface Props {
   locale: Locale;
@@ -13,7 +13,8 @@ const t = ui(locale);
 
 type Review = { author: string; rating: number; language: string; quote: string };
 const reviews = (reviewsData.reviews as Review[]).filter((r) => r.quote?.trim());
-const [featured, ...rest] = reviews;
+// Hidden until the owner switches them on in the CMS (settings → showReviews).
+const [featured, ...rest] = showReviews ? reviews : [];
 
 // Quotes stay in the language they were written in; mark them up so Arabic renders RTL inside a Dutch page.
 const langAttrs = (r: Review) =>

@@ -5,7 +5,7 @@ import MobileMenu from './MobileMenu.astro';
 import Wordmark from './Wordmark.astro';
 import { THEME } from '../lib/theme';
 import { ui, type Locale } from '../lib/i18n';
-import { telHref } from '../lib/site';
+import { instagramHandle, showReviews, telHref, tiktokHandle } from '../lib/site';
 
 interface Props {
   locale: Locale;
@@ -14,10 +14,10 @@ const { locale } = Astro.props;
 const t = ui(locale);
 
 const links = [
-  ['services', t.nav.services],
   ['about', t.nav.about],
-  ['gallery', t.nav.gallery],
-  ['reviews', t.nav.reviews],
+  ['services', t.nav.services],
+  ...(instagramHandle || tiktokHandle ? [['social', t.nav.social] as const] : []),
+  ...(showReviews ? [['reviews', t.nav.reviews] as const] : []),
   ['visit', t.nav.visit],
 ] as const;
 ---

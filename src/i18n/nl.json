@@ -6,7 +6,7 @@
   "nav": {
     "services": "Diensten",
     "about": "Over ons",
-    "gallery": "Foto's",
+    "social": "Volg ons",
     "reviews": "Reviews",
     "visit": "Bezoek",
     "menu": "Menu",
@@ -44,23 +44,21 @@
     "sun": "zondag"
   },
   "services": {
-    "eyebrow": "Diensten & prijzen",
+    "eyebrow": "Onze diensten",
     "title": "Wat we voor je doen",
-    "intro": "Elke behandeling begint met een kort gesprek over wat je wil. De prijs hangt af van de lengte en dikte van je haar; we zeggen het altijd vooraf.",
-    "from": "vanaf",
-    "minutes": "{n} min"
+    "intro": "Elke behandeling begint met een kort gesprek over wat je wil. Vraag gerust naar de prijs: we zeggen hem altijd vooraf."
   },
   "about": {
     "eyebrow": "Over ons"
   },
-  "gallery": {
-    "eyebrow": "Foto's",
-    "title": "Uit het salon",
-    "open": "Foto vergroten",
-    "prev": "Vorige foto",
-    "next": "Volgende foto",
-    "close": "Sluiten",
-    "counter": "{i} van {n}"
+  "social": {
+    "eyebrow": "Volg ons",
+    "title": "Ons werk op *Instagram* & *TikTok*",
+    "intro": "Nieuwe kapsels, kleuren en een kijkje achter de schermen. Volg ons om niets te missen.",
+    "follow": "Volg op {platform}",
+    "load": "Berichten tonen",
+    "notice": "Deze berichten komen van {platforms}. Pas wanneer je op de knop drukt, worden gegevens met hen gedeeld.",
+    "profile": "Bekijk het profiel"
   },
   "reviews": {
     "eyebrow": "Reviews",

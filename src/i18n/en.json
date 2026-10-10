@@ -6,7 +6,7 @@
   "nav": {
     "services": "Services",
     "about": "About",
-    "gallery": "Photos",
+    "social": "Follow us",
     "reviews": "Reviews",
     "visit": "Visit",
     "menu": "Menu",
@@ -44,23 +44,21 @@
     "sun": "Sunday"
   },
   "services": {
-    "eyebrow": "Services & prices",
+    "eyebrow": "Our services",
     "title": "What we do for you",
-    "intro": "Every visit starts with a short chat about what you want. Prices depend on the length and thickness of your hair, and we always tell you before we start.",
-    "from": "from",
-    "minutes": "{n} min"
+    "intro": "Every visit starts with a short chat about what you want. Just ask about the price: we always tell you before we start."
   },
   "about": {
     "eyebrow": "About"
   },
-  "gallery": {
-    "eyebrow": "Photos",
-    "title": "From the salon",
-    "open": "Enlarge photo",
-    "prev": "Previous photo",
-    "next": "Next photo",
-    "close": "Close",
-    "counter": "{i} of {n}"
+  "social": {
+    "eyebrow": "Follow us",
+    "title": "Our work on *Instagram* & *TikTok*",
+    "intro": "New cuts, colours and a look behind the scenes. Follow us so you never miss a thing.",
+    "follow": "Follow on {platform}",
+    "load": "Show posts",
+    "notice": "These posts come from {platforms}. Nothing is shared with them until you press the button.",
+    "profile": "View profile"
   },
   "reviews": {
     "eyebrow": "Reviews",

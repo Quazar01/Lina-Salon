@@ -1,0 +1,157 @@
+---
+// Instagram & TikTok instead of a photo gallery. Nothing is requested from Meta or TikTok until the
+// visitor asks for it (their embeds set tracking cookies); the choice is remembered on this device.
+import { Icon } from 'astro-icon/components';
+import { emphasize, ui, type Locale } from '../lib/i18n';
+import { instagramHandle, instagramPosts, settings, tiktokHandle } from '../lib/site';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = ui(locale);
+
+const platforms = [
+  instagramHandle && {
+    id: 'instagram',
+    name: 'Instagram',
+    icon: 'ph:instagram-logo',
+    handle: instagramHandle,
+    href: settings.instagram,
+  },
+  tiktokHandle && {
+    id: 'tiktok',
+    name: 'TikTok',
+    icon: 'ph:tiktok-logo',
+    handle: tiktokHandle,
+    href: settings.tiktok,
+  },
+].filter((p): p is { id: string; name: string; icon: string; handle: string; href: string } => !!p);
+
+const notice = t.social.notice.replace('{platforms}', platforms.map((p) => p.name).join(' & '));
+---
+
+{
+  platforms.length > 0 && (
+    <section id="social" class="py-20 md:py-28" aria-labelledby="social-title">
+      <div class="container-page">
+        <header class="max-w-2xl" data-reveal>
+          <p class="eyebrow">{t.social.eyebrow}</p>
+          <h2 id="social-title" class="display mt-3 text-[2.1rem] md:text-5xl" set:html={emphasize(t.social.title)} />
+          <p class="mt-4 text-ink-soft">{t.social.intro}</p>
+        </header>
+
+        <div class:list={['mt-10 grid gap-6', platforms.length > 1 && 'md:grid-cols-2']}>
+          {platforms.map((p, i) => (
+            <article class="panel flex min-w-0 flex-col overflow-hidden bg-blush" data-reveal style={`--i:${i}`}>
+              <div class="flex flex-wrap items-center justify-between gap-3 p-5 md:p-6">
+                <a href={p.href} target="_blank" rel="noopener" class="flex min-w-0 items-center gap-3">
+                  <span class="flex size-11 shrink-0 items-center justify-center rounded-full bg-accent text-cream">
+                    <Icon name={p.icon} class="size-6" aria-hidden="true" />
+                  </span>
+                  <span class="min-w-0">
+                    <span class="block text-sm text-ink-faint">{p.name}</span>
+                    <span class="block truncate font-semibold text-ink" dir="ltr">@{p.handle}</span>
+                  </span>
+                </a>
+                <a href={p.href} target="_blank" rel="noopener" class="btn btn-primary min-h-11 px-5 text-[0.95rem]">
+                  {t.social.follow.replace('{platform}', p.name)}
+                  <Icon name="ph:arrow-up-right" class="flip-rtl size-4" aria-hidden="true" />
+                </a>
+              </div>
+
+              <!-- Embed slot: consent placeholder first, the real embed after a tap. -->
+              <div
+                class="relative min-h-[30rem] flex-1 bg-cream/40"
+                data-social-embed={p.id}
+                data-handle={p.handle}
+                data-posts={p.id === 'instagram' ? JSON.stringify(instagramPosts) : undefined}
+              >
+                <div class="absolute inset-0 flex flex-col items-center justify-center gap-4 p-6 text-center" data-social-placeholder>
+                  <Icon name={p.icon} class="size-14 text-accent/70" aria-hidden="true" />
+                  <button type="button" class="btn btn-quiet" data-social-load>
+                    {t.social.load}
+                  </button>
+                  <p class="max-w-[36ch] text-sm text-ink-faint">{notice}</p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<script>
+  const KEY = 'lina-social-consent';
+  const slots = [...document.querySelectorAll<HTMLElement>('[data-social-embed]')];
+
+  function loadScript(src: string) {
+    if (document.querySelector(`script[src="${src}"]`)) return;
+    const s = document.createElement('script');
+    s.src = src;
+    s.async = true;
+    document.body.append(s);
+  }
+
+  function render(slot: HTMLElement) {
+    if (slot.dataset.loaded) return;
+    slot.dataset.loaded = 'true';
+    const handle = slot.dataset.handle!;
+    const wrap = document.createElement('div');
+    wrap.className = 'flex justify-center p-3 md:p-4';
+
+    if (slot.dataset.socialEmbed === 'tiktok') {
+      // TikTok's creator embed page (profile + latest videos), framed directly at a fixed height:
+      // more reliable than embed.js, whose auto-resize does not always fire.
+      slot.replaceChildren(wrap);
+      wrap.append(frame(`https://www.tiktok.com/embed/@${encodeURIComponent(handle)}`, `TikTok @${handle}`));
+      return;
+    }
+
+    const posts = JSON.parse(slot.dataset.posts || '[]') as string[];
+    if (posts.length) {
+      // Official Instagram post embeds for the posts the owner picked in the CMS.
+      wrap.className = 'grid gap-4 p-3 md:p-4';
+      wrap.innerHTML = posts
+        .map(
+          (url) =>
+            `<blockquote class="instagram-media" data-instgrm-permalink="${url}" data-instgrm-version="14" style="margin:0 auto;max-width:540px;width:100%;min-width:0"></blockquote>`,
+        )
+        .join('');
+      slot.replaceChildren(wrap);
+      loadScript('https://www.instagram.com/embed.js');
+      (window as { instgrm?: { Embeds: { process(): void } } }).instgrm?.Embeds.process();
+    } else {
+      // No posts picked yet: Instagram's profile embed.
+      wrap.append(frame(`https://www.instagram.com/${encodeURIComponent(handle)}/embed/`, `Instagram @${handle}`));
+      slot.replaceChildren(wrap);
+    }
+  }
+
+  function frame(src: string, title: string) {
+    const iframe = document.createElement('iframe');
+    iframe.src = src;
+    iframe.title = title;
+    iframe.loading = 'lazy';
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    iframe.className = 'block h-[36rem] w-full max-w-[540px] rounded-xl border-0 bg-white';
+    return iframe;
+  }
+
+  function loadAll() {
+    try {
+      localStorage.setItem(KEY, '1');
+    } catch {}
+    slots.forEach(render);
+  }
+
+  slots.forEach((slot) => slot.querySelector('[data-social-load]')?.addEventListener('click', loadAll));
+
+  let consented = false;
+  try {
+    consented = localStorage.getItem(KEY) === '1';
+  } catch {}
+  if (consented) slots.forEach(render);
+</script>

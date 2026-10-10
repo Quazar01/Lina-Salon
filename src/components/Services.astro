@@ -1,6 +1,7 @@
 ---
+import Sparkle from './Sparkle.astro';
 import services from '../content/services.json';
-import { formatPrice, localize, ui, type Locale, type Localized } from '../lib/i18n';
+import { localize, ui, type Locale, type Localized } from '../lib/i18n';
 
 interface Props {
   locale: Locale;
@@ -8,7 +9,7 @@ interface Props {
 const { locale } = Astro.props;
 const t = ui(locale);
 
-type Item = { name: Localized; description?: Localized; price: number; from?: boolean; duration?: number };
+type Item = { name: Localized; description?: Localized };
 type Category = { name: Localized; items: Item[] };
 const categories = services.categories as Category[];
 ---
@@ -65,7 +66,8 @@ const categories = services.categories as Category[];
                   const name = localize(item.name, locale);
                   const desc = localize(item.description, locale);
                   return (
-                    <li class="flex items-start justify-between gap-6 py-4">
+                    <li class="flex items-start gap-3 py-4">
+                      <Sparkle class="mt-[0.45em] size-2.5 shrink-0 text-accent" />
                       <div class="min-w-0">
                         <p class="text-[1.05rem] font-medium text-ink" lang={name.lang} dir={name.dir}>
                           {name.text}
@@ -75,16 +77,7 @@ const categories = services.categories as Category[];
                             {desc.text}
                           </p>
                         )}
-                        {item.duration ? (
-                          <p class="mt-1 text-sm text-ink-faint">{t.services.minutes.replace('{n}', String(item.duration))}</p>
-                        ) : null}
                       </div>
-                      <p class="shrink-0 text-end leading-tight">
-                        {item.from && <span class="block text-xs text-ink-faint">{t.services.from}</span>}
-                        <span class="text-[1.05rem] font-semibold tabular-nums text-accent-deep" dir="ltr">
-                          {formatPrice(item.price, locale)}
-                        </span>
-                      </p>
                     </li>
                   );
                 })}

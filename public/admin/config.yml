@@ -48,9 +48,20 @@ collections:
             name: googleReviewsUrl
             widget: string
             required: false
-          - { label: رابط إنستغرام, name: instagram, widget: string, required: false, hint: 'اتركيه فارغًا لإخفاء الأيقونة.' }
+          - { label: رابط حساب إنستغرام, name: instagram, widget: string, required: false, hint: 'مثال: https://www.instagram.com/linasalon/ — منشوراتكِ تظهر في قسم «تابعينا». اتركيه فارغًا لإخفائه.' }
           - { label: رابط فيسبوك, name: facebook, widget: string, required: false, hint: 'اتركيه فارغًا لإخفاء الأيقونة.' }
-          - { label: رابط تيك توك, name: tiktok, widget: string, required: false, hint: 'اتركيه فارغًا لإخفاء الأيقونة.' }
+          - { label: رابط حساب تيك توك, name: tiktok, widget: string, required: false, hint: 'مثال: https://www.tiktok.com/@linasalon — آخر فيديوهاتكِ تظهر في قسم «تابعينا». اتركيه فارغًا لإخفائه.' }
+          - label: منشورات إنستغرام المميزة (اختياري)
+            name: instagramPosts
+            widget: list
+            required: false
+            hint: 'انسخي رابط المنشور من إنستغرام (مشاركة ← نسخ الرابط) والصقيه هنا. إذا تركتِها فارغة يظهر حسابكِ كاملًا.'
+            field: { label: رابط المنشور, name: url, widget: string }
+          - label: إظهار آراء الزبونات على الموقع
+            name: showReviews
+            widget: boolean
+            default: false
+            hint: 'فعّليه عندما تكون آراء الزبونات الحقيقية جاهزة في قسم «آراء الزبونات».'
           - label: مواعيد العمل
             name: hours
             widget: list
@@ -118,7 +129,7 @@ collections:
 
       # ------------------------------------------------------------------ Services
       - name: services
-        label: الخدمات والأسعار
+        label: الخدمات
         file: src/content/services.json
         fields:
           - label: الأقسام
@@ -132,7 +143,7 @@ collections:
                 name: items
                 widget: list
                 label_singular: خدمة
-                summary: '{{fields.name.ar}} · {{fields.price}} €'
+                summary: '{{fields.name.ar}}'
                 fields:
                   - { label: اسم الخدمة, name: name, widget: object, fields: *short_text }
                   - label: وصف قصير (اختياري)
@@ -145,23 +156,6 @@ collections:
                       - { label: بالهولندية (يترجمها سامي), name: nl, widget: text, required: false }
                       - { label: بالفرنسية (يترجمها سامي), name: fr, widget: text, required: false }
                       - { label: بالإنجليزية (يترجمها سامي), name: en, widget: text, required: false }
-                  - { label: السعر باليورو, name: price, widget: number, value_type: float, min: 0 }
-                  - { label: السعر «ابتداءً من», name: from, widget: boolean, default: false, hint: 'فعّليه إذا كان السعر يبدأ من هذا المبلغ ويزيد حسب الشعر.' }
-                  - { label: المدة بالدقائق, name: duration, widget: number, value_type: int, min: 0, required: false, hint: 'اكتبي 0 لإخفاء المدة.' }
-
-      # ------------------------------------------------------------------ Gallery
-      - name: gallery
-        label: معرض الصور
-        file: src/content/gallery.json
-        fields:
-          - label: الصور
-            name: images
-            widget: list
-            label_singular: صورة
-            summary: '{{fields.alt.ar}}'
-            fields:
-              - { label: الصورة, name: image, widget: image, choose_url: false }
-              - { label: وصف الصورة (لمن لا يرى الصور), name: alt, widget: object, fields: *short_text }
 
       # ------------------------------------------------------------------ Reviews
       - name: reviews
