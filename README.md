@@ -63,7 +63,11 @@ Interface strings (buttons, day names, section titles) live in `src/i18n/{nl,fr,
    - GitHub → Settings → Developer settings → OAuth Apps → New. Homepage: your site URL. Callback URL: `https://api.netlify.com/auth/done`.
    - Netlify → Site configuration → Access & security → OAuth → Install provider → GitHub → paste the Client ID and Secret.
 4. **Your mother's account:** create a GitHub account for her and add it as a collaborator on the repo (Settings → Collaborators). She logs in at `https://<your-domain>/admin/` with «تسجيل الدخول بحساب GitHub» ("Log in with GitHub").
-5. **Domain:** buy e.g. `linasalon.be` (any `.be` registrar, or Netlify itself). In Netlify → Domain management → Add domain, then follow the DNS instructions. HTTPS is automatic.
+5. **Domain:** buy e.g. `linasalon.be` (any `.be` registrar, or Netlify itself). In Netlify → Domain management → Add domain, then follow the DNS instructions. HTTPS is automatic. Afterwards update `site_url`/`display_url` in `public/admin/config.yml` and the homepage URL of the GitHub OAuth app (the callback URL stays the same).
+
+> **Keep the GitHub repo public.** On Netlify's free plan, a private repo only deploys commits from members of the Netlify team. The owner's CMS edits are commits from her own GitHub account, so on a private repo Netlify blocks them ("Build blocked: Unrecognized Git contributor") and her changes never go live. The repo contains no secrets (the OAuth client secret lives in Netlify, not here), so public is safe. Making it private again requires a paid Netlify plan with her as a team member.
+>
+> Because the repo is public, every editor should turn on GitHub → Settings → Emails → **"Keep my email addresses private"**, so commits use a `…@users.noreply.github.com` address instead of a personal email.
 
 ## Project layout
 
