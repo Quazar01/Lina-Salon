@@ -8,6 +8,18 @@
   # (made-up reviews, placeholder phone numbers). Remove this line at launch.
   PUBLIC_NOINDEX = "true"
 
+# Security headers for every page (incl. the /admin/ editor):
+# no framing by other sites (clickjacking), no MIME sniffing, HTTPS only,
+# minimal referrer info, and no access to camera/microphone/location.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+    Strict-Transport-Security = "max-age=31536000"
+
 [[headers]]
   for = "/_astro/*"
   [headers.values]

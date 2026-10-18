@@ -16,9 +16,8 @@ backend:
 local_backend: true
 
 locale: ar
-# Update both to the real domain once it is connected.
-site_url: https://lina-salon-glam.netlify.app
-display_url: https://lina-salon-glam.netlify.app
+site_url: https://linakapster.be
+display_url: https://linakapster.be
 
 media_folder: src/assets/uploads
 public_folder: /src/assets/uploads

@@ -5,9 +5,8 @@ import icon from 'astro-icon';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  // Netlify sets URL to the site's primary address at build time, so this becomes the real
-  // domain automatically once it is connected. Locally it falls back to the Netlify address.
-  site: process.env.SITE_URL || process.env.URL || 'https://lina-salon-glam.netlify.app',
+  // Netlify sets URL to the site's primary domain at build time; locally it falls back to it too.
+  site: process.env.SITE_URL || process.env.URL || 'https://linakapster.be',
   trailingSlash: 'always',
   // One small stylesheet: inline it so it never blocks the first paint on slow mobile networks.
   build: { inlineStylesheets: 'always' },
