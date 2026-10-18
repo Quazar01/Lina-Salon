@@ -2,9 +2,9 @@
   "heroImage": "/src/assets/uploads/hero.jpg",
   "heroText": {
     "ar": "قصّ وصبغ وتصفيف في صالون مفعم بالحياة في أنتويرب، للنساء فقط.",
-    "nl": "Knippen, kleuren en stylen in een levendig salon in Antwerpen, alleen voor vrouwen.",
-    "fr": "Coupe, couleur et coiffage dans un salon plein de vie à Anvers, réservé aux femmes.",
-    "en": "Cuts, colour and styling in a lively salon in Antwerp, just for women."
+    "nl": "Knippen, kleuren en stylen in een bruisend salon in Antwerpen, alleen voor vrouwen.",
+    "fr": "Coupe, couleur et coiffage dans un salon débordant de vie à Anvers, réservé aux femmes.",
+    "en": "Cuts, colour and styling in a vibrant salon in Antwerp, just for women."
   },
   "heroImageAlt": {
     "ar": "زبونة بشعر بني طويل مموّج داخل لينا صالون",
