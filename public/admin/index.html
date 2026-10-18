@@ -6,6 +6,13 @@
     <meta name="robots" content="noindex" />
     <title>إدارة موقع لينا صالون</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <!-- "Add to home screen" icon for the owner's phone. Deliberately no full-screen app mode
+         (apple-mobile-web-app-capable / display: standalone): the GitHub login uses a pop-up,
+         which breaks inside full-screen home-screen apps on iOS. -->
+    <link rel="apple-touch-icon" href="/admin/apple-touch-icon.png" />
+    <link rel="manifest" href="/admin/manifest.webmanifest" />
+    <meta name="apple-mobile-web-app-title" content="لينا" />
+    <meta name="theme-color" content="#6b1442" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet" />
     <style>
@@ -26,6 +33,174 @@
       }
       label {
         font-size: 15px !important;
+      }
+
+      /*
+       * Phone layout. The owner edits mostly on her phone, but Decap assumes an
+       * 800px-wide desktop: it squeezes the page and pushes "Publish" and
+       * "Upload photo" off-screen. Selectors target Decap's stable component
+       * labels (e.g. "css-<hash>-AppMainContainer"); Decap is pinned to 3.8.2
+       * below, so re-check these when upgrading it.
+       */
+      @media (max-width: 799px) {
+        /* Full width instead of the 800px minimum */
+        [class*='-AppHeaderContent'],
+        [class*='-AppMainContainer'],
+        [class*='-EditorContainer'],
+        [class*='-ToolbarContainer'] {
+          min-width: 0 !important;
+          width: 100% !important;
+          max-width: 100% !important;
+          box-sizing: border-box;
+        }
+        [class*='-AppMainContainer'] {
+          margin: 0 !important;
+          padding: 12px !important;
+        }
+
+        /* Top bar: the site link doesn't fit; tighter tabs */
+        [class*='-AppHeaderContent'] {
+          padding: 0 8px !important;
+        }
+        [class*='-AppHeaderSiteLink'] {
+          display: none !important;
+        }
+        [class*='-AppHeaderNavLink'],
+        [class*='-AppHeaderButton'] {
+          padding: 12px 10px !important;
+          font-size: 15px !important;
+        }
+
+        /* Content list: no sidebar (there is one collection), full-width cards */
+        [class*='-SidebarContainer'] {
+          display: none !important;
+        }
+        [class*='-CollectionContainer'],
+        [class*='-CollectionMain'] {
+          margin: 0 !important;
+          padding: 0 !important;
+          width: 100% !important;
+        }
+        [class*='-CollectionTopContainer'],
+        [class*='-CollectionControlsContainer'],
+        [class*='-CardsGrid'] {
+          width: 100% !important;
+          max-width: 100% !important;
+          margin-left: 0 !important;
+          margin-right: 0 !important;
+          box-sizing: border-box;
+        }
+        [class*='-CardsGrid'] {
+          padding: 0 !important;
+        }
+        [class*='-ListCard-'] {
+          width: 100% !important;
+          margin: 0 0 10px !important;
+        }
+        [class*='-ListCardLink'] {
+          padding: 18px 16px !important;
+        }
+        [class*='-ListCardTitle'] {
+          font-size: 18px !important;
+        }
+
+        /* Editor toolbar: keep "back" and "Publish" on one visible row */
+        [class*='-ToolbarContainer'] {
+          height: auto !important;
+          min-height: 56px;
+          flex-wrap: nowrap;
+          padding: 4px 6px !important;
+        }
+        [class*='-ToolbarSectionBackLink'] {
+          flex: 1 1 auto;
+          min-width: 0;
+          padding: 0 8px !important;
+        }
+        [class*='-ToolbarSectionMain'] {
+          flex: 0 0 auto;
+          min-width: 0;
+          padding: 0 6px !important;
+        }
+        [class*='-ToolbarSectionMeta'],
+        [class*='-PreviewButtonContainer'] {
+          display: none !important;
+        }
+
+        /* Only the Arabic box per text: the NL/FR/EN boxes (Sami's translations) stay on the computer */
+        div:has(> [class*='-ControlTopbar'] > label[for^='nl-field-']),
+        div:has(> [class*='-ControlTopbar'] > label[for^='fr-field-']),
+        div:has(> [class*='-ControlTopbar'] > label[for^='en-field-']) {
+          display: none !important;
+        }
+
+        /* Less nested padding, finger-sized buttons */
+        [class*='-ControlPaneContainer'] {
+          padding: 12px 10px !important;
+        }
+        [class*='-ExpandButton'],
+        [class*='-TopBarButton-'] {
+          min-width: 44px !important;
+          min-height: 44px !important;
+          display: inline-flex !important;
+          align-items: center;
+          justify-content: center;
+        }
+        [class*='-StyledListItemTopBar'] {
+          min-height: 44px;
+        }
+        [class*='-AddButton'] {
+          min-height: 40px !important;
+          padding: 0 14px !important;
+          font-size: 15px !important;
+        }
+
+        /* Photo library pop-up: fit the screen, keep "Upload" and "Delete" visible */
+        [class*='StyledModal'] {
+          width: calc(100vw - 24px) !important;
+          max-width: calc(100vw - 24px) !important;
+          box-sizing: border-box;
+          padding: 16px 12px !important;
+          grid-template-rows: auto minmax(0, 1fr) !important;
+        }
+        [class*='-LibraryTop'] {
+          height: auto !important;
+          flex-wrap: nowrap !important;
+          padding-bottom: 8px;
+        }
+        [class*='-LibraryTop'],
+        [class*='-LibraryTop'] * {
+          min-width: 0 !important;
+        }
+        [class*='-LibraryTitle'] {
+          margin-left: 48px !important;
+        }
+        [class*='StyledModal'] [class*='-RowContainer'],
+        [class*='-ButtonsContainer'] {
+          flex-wrap: wrap !important;
+          width: 100% !important;
+          max-width: 100% !important;
+          gap: 8px;
+          box-sizing: border-box;
+        }
+        [class*='-ButtonsContainer'] {
+          justify-content: flex-start !important;
+        }
+        [class*='StyledModal'] [class*='-SearchContainer'] {
+          flex: 1 1 100% !important;
+          width: 100% !important;
+        }
+        [class*='-SearchContainer'] input {
+          width: 100% !important;
+          box-sizing: border-box;
+        }
+        [class*='-LibraryTop'] button,
+        [class*='-LibraryTop'] label {
+          min-height: 44px !important;
+        }
+        [class*='-CloseButton'] {
+          left: 6px !important;
+          top: 6px !important;
+        }
       }
     </style>
     <script>

@@ -6,3 +6,6 @@ dist/
 .env.*
 .DS_Store
 !.env.soft
+
+# Local print files (QR codes, posters): never committed
+print/
