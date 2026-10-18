@@ -9,6 +9,7 @@
     "preview": "astro preview",
     "test": "vitest run",
     "check:translations": "node scripts/check-translations.mjs",
+    "translations:reviewed": "node scripts/check-translations.mjs --mark-reviewed",
     "cms": "npx decap-server",
     "dev:soft": "astro dev --mode soft",
     "build:soft": "astro build --mode soft"

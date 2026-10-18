@@ -7,7 +7,7 @@ name: Translations
 on:
   push:
     branches: [main]
-    paths: ['src/content/**']
+    paths: ['src/content/**', 'translations-reviewed.json']
   workflow_dispatch:
 
 permissions:

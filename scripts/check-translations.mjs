@@ -77,6 +77,55 @@ export function findOutdated(versions) {
   return rows;
 }
 
+/**
+ * Reviews record "these translations were checked against this exact Arabic text and
+ * are still fine". They only hide *outdated* languages, and only while the Arabic is
+ * unchanged: a later edit makes the field show up again. Missing translations are
+ * never hidden.
+ */
+export function applyReviews(rows, reviews) {
+  return rows
+    .map((r) => {
+      if (r.problem !== 'outdated') return r;
+      const ok = new Set(
+        reviews.filter((v) => v.file === r.file && v.path === r.path && v.ar === r.ar).flatMap((v) => v.langs),
+      );
+      return { ...r, langs: r.langs.filter((l) => !ok.has(l)) };
+    })
+    .filter((r) => r.langs.length > 0);
+}
+
+/**
+ * New reviews list: existing reviews whose Arabic is still current, plus the selected
+ * outdated rows (selectors like "home.json:heroText"; none = all outdated rows).
+ * `current` maps file -> path -> current Arabic text.
+ */
+export function markReviewed(rows, existing, current, selectors) {
+  const key = (v) => `${v.file}:${v.path}`;
+  const byKey = new Map();
+  for (const v of existing) {
+    if (current[v.file]?.[v.path]?.trim() !== v.ar) continue; // Arabic changed since: stale
+    byKey.set(key(v), { ...v, langs: [...v.langs] });
+  }
+  for (const r of rows) {
+    if (r.problem !== 'outdated' || (selectors.length && !selectors.includes(key(r)))) continue;
+    const entry = byKey.get(key(r));
+    const langs = new Set([...(entry && entry.ar === r.ar ? entry.langs : []), ...r.langs]);
+    byKey.set(key(r), { file: r.file, path: r.path, ar: r.ar, langs: [...langs].sort() });
+  }
+  return [...byKey.values()].sort((a, b) => key(a).localeCompare(key(b)));
+}
+
+const REVIEWS_FILE = fileURLToPath(new URL('../translations-reviewed.json', import.meta.url));
+
+function readReviews() {
+  try {
+    return JSON.parse(readFileSync(REVIEWS_FILE, 'utf8'));
+  } catch {
+    return [];
+  }
+}
+
 /** Every committed version of a content file (oldest first) plus the working copy if it differs. */
 function history(file) {
   const rel = `src/content/${file}`;
@@ -96,9 +145,11 @@ function history(file) {
 
 function report() {
   const rows = [];
+  const currentAr = {}; // file -> path -> Arabic, for pruning reviews
   let historyAvailable = true;
   for (const file of readdirSync(CONTENT_DIR).filter((f) => f.endsWith('.json')).sort()) {
     const current = JSON.parse(readFileSync(join(CONTENT_DIR, file), 'utf8'));
+    currentAr[file] = Object.fromEntries([...localizedFields(current)].map(([p, f]) => [p, f.ar]));
     for (const r of findMissing(current)) rows.push({ file, path: r.path, ar: r.ar, problem: 'missing', langs: r.missing });
     let versions;
     try {
@@ -109,7 +160,7 @@ function report() {
     }
     for (const r of findOutdated(versions)) rows.push({ file, path: r.path, ar: r.ar, problem: 'outdated', langs: r.outdated });
   }
-  return { rows, historyAvailable };
+  return { rows, currentAr, historyAvailable };
 }
 
 const LABEL = { missing: 'Missing', outdated: 'Outdated (Arabic changed since)' };
@@ -132,11 +183,26 @@ function toMarkdown(rows) {
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const args = process.argv.slice(2);
-  const { rows, historyAvailable } = report();
+  const { rows: raw, currentAr, historyAvailable } = report();
+  if (!historyAvailable) console.warn('Warning: no git history available, so outdated translations were not checked.');
+
+  if (args.includes('--mark-reviewed')) {
+    // e.g. --mark-reviewed home.json:heroText   (no names = every outdated text)
+    const selectors = args.filter((a) => a !== '--mark-reviewed' && !a.startsWith('--'));
+    const before = readReviews();
+    const after = markReviewed(raw, before, currentAr, selectors);
+    writeFileSync(REVIEWS_FILE, JSON.stringify(after, null, 2) + '\n');
+    const shown = applyReviews(raw, before).filter((r) => r.problem === 'outdated');
+    const marked = shown.filter((r) => !selectors.length || selectors.includes(`${r.file}:${r.path}`));
+    if (!marked.length) console.log('Nothing outdated to mark as reviewed.');
+    for (const r of marked) console.log(`  reviewed: ${r.file} → ${r.path}  [${r.langs.join(', ')}]`);
+    console.log('Saved translations-reviewed.json. Commit it to clear these from the issue.\n');
+  }
+
+  const rows = applyReviews(raw, readReviews());
   const mdIndex = args.indexOf('--markdown');
   if (mdIndex !== -1 && args[mdIndex + 1]) writeFileSync(args[mdIndex + 1], toMarkdown(rows));
 
-  if (!historyAvailable) console.warn('Warning: no git history available, so outdated translations were not checked.');
   if (rows.length) {
     console.log(`${rows.length} text(s) need translating:`);
     for (const r of rows) console.log(`  [${r.problem}] ${r.file} → ${r.path}  [${r.langs.join(', ')}]  "${r.ar.slice(0, 60)}"`);

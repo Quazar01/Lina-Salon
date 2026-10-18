@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 // @ts-expect-error plain .mjs script without types
-import { findMissing, findOutdated } from '../scripts/check-translations.mjs';
+import { applyReviews, findMissing, findOutdated, markReviewed } from '../scripts/check-translations.mjs';
 
 describe('findMissing', () => {
   it('reports empty translations of filled-in Arabic text, with a readable path', () => {
@@ -52,5 +52,41 @@ describe('findOutdated', () => {
     const history = [{}, { about: { ar: 'أ', nl: 'a', fr: '', en: '' } }, { about: { ar: 'ب', nl: 'a', fr: '', en: '' } }];
     expect(findOutdated(history)).toEqual([{ path: 'about', ar: 'ب', outdated: ['nl'] }]);
     expect(findOutdated([{}, v('أ', 'a', 'a', 'a')])).toEqual([]);
+  });
+});
+
+describe('reviews ("checked, still fine")', () => {
+  const row = { file: 'home.json', path: 'heroText', ar: 'نص جديد', problem: 'outdated', langs: ['nl', 'fr', 'en'] };
+
+  it('hides outdated languages reviewed for exactly this Arabic text', () => {
+    const reviews = [{ file: 'home.json', path: 'heroText', ar: 'نص جديد', langs: ['nl', 'fr'] }];
+    expect(applyReviews([row], reviews)).toEqual([{ ...row, langs: ['en'] }]);
+    expect(applyReviews([row], [{ ...reviews[0], langs: ['nl', 'fr', 'en'] }])).toEqual([]);
+  });
+
+  it('ignores a review once the Arabic has changed again', () => {
+    const reviews = [{ file: 'home.json', path: 'heroText', ar: 'نص قديم', langs: ['nl', 'fr', 'en'] }];
+    expect(applyReviews([row], reviews)).toEqual([row]);
+  });
+
+  it('never hides missing translations', () => {
+    const missing = { ...row, problem: 'missing', langs: ['nl'] };
+    expect(applyReviews([missing], [{ file: 'home.json', path: 'heroText', ar: 'نص جديد', langs: ['nl'] }])).toEqual([missing]);
+  });
+
+  it('marks the selected outdated rows, merges with earlier reviews and drops stale ones', () => {
+    const current = { 'home.json': { heroText: 'نص جديد', aboutText: 'عن' } };
+    const existing = [
+      { file: 'home.json', path: 'heroText', ar: 'نص جديد', langs: ['nl'] },
+      { file: 'home.json', path: 'aboutText', ar: 'نص قديم', langs: ['fr'] }, // Arabic changed since: stale
+    ];
+    const other = { ...row, path: 'aboutText', ar: 'عن', langs: ['en'] };
+    expect(markReviewed([row, other], existing, current, ['home.json:heroText'])).toEqual([
+      { file: 'home.json', path: 'heroText', ar: 'نص جديد', langs: ['en', 'fr', 'nl'] },
+    ]);
+    expect(markReviewed([row, other], [], current, [])).toEqual([
+      { file: 'home.json', path: 'aboutText', ar: 'عن', langs: ['en'] },
+      { file: 'home.json', path: 'heroText', ar: 'نص جديد', langs: ['en', 'fr', 'nl'] },
+    ]);
   });
 });

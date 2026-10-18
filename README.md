@@ -51,6 +51,11 @@ Every text the owner can edit is stored in all four languages:
 - She writes the **Arabic**. The NL/FR/EN fields are labelled «يترجمها سامي» ("Sami translates") and are optional.
 - While a translation is empty, that page shows the Arabic text, correctly marked right-to-left.
 - If she later **edits** Arabic text that was already translated, the old translation stays on the site until you update it. The check spots this from the git history: a translation is *outdated* when the Arabic changed in a later commit. Each language is tracked separately, and translating in the CMS or in code both count.
+- If her Arabic edit doesn't need new translations (a typo fix, punctuation), mark it as checked instead of changing the translations:
+  - `npm run translations:reviewed` marks **every** outdated text as reviewed.
+  - `npm run translations:reviewed -- home.json:heroText` marks only the texts you name (the names come from `npm run check:translations`).
+
+  This writes `translations-reviewed.json`; commit and push it, and the issue updates. A review only covers that exact Arabic text, so if she edits it again it is flagged again. Missing (empty) translations can't be marked as reviewed.
 - On every content change, the **Translations** GitHub Action (`.github/workflows/translations.yml`) keeps one issue, "Translations needed", listing every field that is missing or outdated. It closes itself once everything is translated and up to date. You get notified like for any issue. Locally: `npm run check:translations`.
 - Fill the translations in through the CMS (same fields), or edit `src/content/*.json` directly.
 
