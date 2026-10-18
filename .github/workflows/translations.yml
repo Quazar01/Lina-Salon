@@ -1,5 +1,6 @@
 # When content changes (usually a CMS edit in Arabic), keep a single
-# "Translations needed" issue listing what still needs NL / FR / EN text.
+# "Translations needed" issue listing NL / FR / EN text that is missing, or
+# outdated because the Arabic was edited after it was translated.
 # The issue closes itself once everything is translated.
 name: Translations
 
@@ -22,11 +23,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # full history: needed to detect outdated translations
       - uses: actions/setup-node@v4
         with:
           node-version: 22
 
-      - name: Find missing translations
+      - name: Find missing or outdated translations
         id: check
         run: |
           node scripts/check-translations.mjs --markdown report.md
@@ -52,5 +55,5 @@ jobs:
               gh issue create --title "$TITLE" --label translations --body-file report.md
             fi
           elif [ -n "$NUMBER" ]; then
-            gh issue close "$NUMBER" --comment "Everything is translated now."
+            gh issue close "$NUMBER" --comment "Everything is translated and up to date now."
           fi

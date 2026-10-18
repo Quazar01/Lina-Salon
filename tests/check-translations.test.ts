@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 // @ts-expect-error plain .mjs script without types
-import { findMissing } from '../scripts/check-translations.mjs';
+import { findMissing, findOutdated } from '../scripts/check-translations.mjs';
 
 describe('findMissing', () => {
   it('reports empty translations of filled-in Arabic text, with a readable path', () => {
@@ -23,5 +23,34 @@ describe('findMissing', () => {
 
   it('ignores fully translated fields and non-localized values', () => {
     expect(findMissing({ phone: '+32', t: { ar: 'أ', nl: 'a', fr: 'a', en: 'a' } })).toEqual([]);
+  });
+});
+
+describe('findOutdated', () => {
+  const v = (ar: string, nl: string, fr: string, en: string) => ({ about: { ar, nl, fr, en } });
+
+  it('flags every translation older than the latest Arabic edit', () => {
+    const history = [v('أ', 'a', 'a', 'a'), v('ب', 'a', 'a', 'a')];
+    expect(findOutdated(history)).toEqual([{ path: 'about', ar: 'ب', outdated: ['nl', 'fr', 'en'] }]);
+  });
+
+  it('is happy once the translations are updated after the Arabic', () => {
+    const history = [v('أ', 'a', 'a', 'a'), v('ب', 'a', 'a', 'a'), v('ب', 'b', 'b', 'b')];
+    expect(findOutdated(history)).toEqual([]);
+  });
+
+  it('tracks each language separately', () => {
+    const history = [v('أ', 'a', 'a', 'a'), v('ب', 'a', 'a', 'a'), v('ب', 'b', 'a', 'a')];
+    expect(findOutdated(history)).toEqual([{ path: 'about', ar: 'ب', outdated: ['fr', 'en'] }]);
+  });
+
+  it('counts Arabic and translations changed in the same version as up to date', () => {
+    expect(findOutdated([v('أ', 'a', 'a', 'a'), v('ب', 'b', 'b', 'b')])).toEqual([]);
+  });
+
+  it('does not flag fields that first appear later, or empty translations (those are "missing")', () => {
+    const history = [{}, { about: { ar: 'أ', nl: 'a', fr: '', en: '' } }, { about: { ar: 'ب', nl: 'a', fr: '', en: '' } }];
+    expect(findOutdated(history)).toEqual([{ path: 'about', ar: 'ب', outdated: ['nl'] }]);
+    expect(findOutdated([{}, v('أ', 'a', 'a', 'a')])).toEqual([]);
   });
 });

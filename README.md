@@ -50,7 +50,8 @@ Every text the owner can edit is stored in all four languages:
 
 - She writes the **Arabic**. The NL/FR/EN fields are labelled «يترجمها سامي» ("Sami translates") and are optional.
 - While a translation is empty, that page shows the Arabic text, correctly marked right-to-left.
-- On every content change, the **Translations** GitHub Action (`.github/workflows/translations.yml`) keeps one issue, "Translations needed", listing exactly which fields are missing. It closes itself once everything is translated. You get notified like for any issue.
+- If she later **edits** Arabic text that was already translated, the old translation stays on the site until you update it. The check spots this from the git history: a translation is *outdated* when the Arabic changed in a later commit. Each language is tracked separately, and translating in the CMS or in code both count.
+- On every content change, the **Translations** GitHub Action (`.github/workflows/translations.yml`) keeps one issue, "Translations needed", listing every field that is missing or outdated. It closes itself once everything is translated and up to date. You get notified like for any issue. Locally: `npm run check:translations`.
 - Fill the translations in through the CMS (same fields), or edit `src/content/*.json` directly.
 
 Interface strings (buttons, day names, section titles) live in `src/i18n/{nl,fr,ar,en}.json` and are edited in code.
