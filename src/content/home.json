@@ -2,9 +2,9 @@
   "heroImage": "/src/assets/uploads/hero.jpg",
   "heroText": {
     "ar": "قصّ وصبغ وتصفيف في صالون مليئ بالحياة في أنتويرب، للنساء فقط.",
-    "nl": "Knippen, kleuren en stylen in een rustig salon in Antwerpen, alleen voor vrouwen.",
-    "fr": "Coupe, couleur et coiffage dans un salon calme à Anvers, réservé aux femmes.",
-    "en": "Cuts, colour and styling in a calm salon in Antwerp, just for women."
+    "nl": "Knippen, kleuren en stylen in een levendig salon in Antwerpen, alleen voor vrouwen.",
+    "fr": "Coupe, couleur et coiffage dans un salon plein de vie à Anvers, réservé aux femmes.",
+    "en": "Cuts, colour and styling in a lively salon in Antwerp, just for women."
   },
   "heroImageAlt": {
     "ar": "زبونة بشعر بني طويل مموّج داخل لينا صالون",
@@ -28,9 +28,9 @@
   "aboutImage": "/src/assets/uploads/screenshot-2026-10-10-154748.png",
   "aboutText": {
     "ar": "افتتحت لينا الصالون عام 2016 بفكرة واحدة: مكان تأخذ فيه المرأة وقتها. لا استعجال بين المواعيد، ولا دخول للرجال، وخصوصية تتيح لكِ خلع حجابكِ والاسترخاء.\n\nثلاثون عاما خبرة وما زالت لينا تعمل بنفسها كل يوم لتعطي شعرك المظهر, اللون, والتسريحة التي ترين نفسك تستحقينها. معظم الزبونات يعدن إلينا منذ سنوات، والكثيرات يأتين مع بناتهن.",
-    "nl": "Lina opende het salon in 2011 met één idee: een plek waar vrouwen de tijd mogen nemen. Geen haast tussen afspraken, geen mannen die binnenlopen, en genoeg privacy om je hoofddoek af te doen en tot rust te komen.\n\nZe staat nog elke dag zelf in het salon, samen met een klein team dat ze zelf heeft opgeleid. De meeste klanten komen al jaren terug, en velen nemen hun dochters mee.",
-    "fr": "Lina a ouvert le salon en 2011 avec une idée simple : un lieu où les femmes peuvent prendre leur temps. Pas de précipitation entre les rendez-vous, pas d'hommes qui entrent, et assez d'intimité pour retirer son foulard et se détendre.\n\nElle coiffe encore elle-même chaque jour, avec une petite équipe qu'elle a formée. La plupart des clientes reviennent depuis des années, et beaucoup viennent avec leurs filles.",
-    "en": "Lina opened the salon in 2011 with one idea: a place where women can take their time. No rush between appointments, no men walking in, and enough privacy to take off your headscarf and relax.\n\nShe still works in the salon every day, together with a small team she trained herself. Most clients have been coming back for years, and many bring their daughters."
+    "nl": "Lina opende het salon in 2016 met één idee: een plek waar vrouwen de tijd mogen nemen. Geen haast tussen afspraken, geen mannen die binnenlopen, en genoeg privacy om je hoofddoek af te doen en tot rust te komen.\n\nMet dertig jaar ervaring staat Lina nog elke dag zelf in het salon, om je haar de look, de kleur en het kapsel te geven die je verdient. De meeste klanten komen al jaren terug, en velen nemen hun dochters mee.",
+    "fr": "Lina a ouvert le salon en 2016 avec une idée simple : un lieu où les femmes peuvent prendre leur temps. Pas de précipitation entre les rendez-vous, pas d'hommes qui entrent, et assez d'intimité pour retirer son foulard et se détendre.\n\nForte de trente ans d'expérience, Lina coiffe encore elle-même chaque jour, pour donner à vos cheveux l'allure, la couleur et la coiffure que vous méritez. La plupart des clientes reviennent depuis des années, et beaucoup viennent avec leurs filles.",
+    "en": "Lina opened the salon in 2016 with one idea: a place where women can take their time. No rush between appointments, no men walking in, and enough privacy to take off your headscarf and relax.\n\nWith thirty years of experience, Lina still works in the salon every day, giving your hair the look, colour and style you feel you deserve. Most clients have been coming back for years, and many bring their daughters."
   },
   "aboutImageAlt": {
     "ar": "لينا تصفّف شعر زبونة",
